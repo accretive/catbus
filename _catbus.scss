@@ -1,3 +1,6 @@
+// Compass
+@import "components/harp-compass/scss/_compass.scss";
+
 $catbus-top-gap: 56px !default;
 $catbus-top-drop: 108px !default;
 $catbus-nav-width: 261px !default;
@@ -10,15 +13,11 @@ $screen-lg: 1200px !default;
 .catbus {
   position: relative;
   @include clearfix;
-  // @include transition-property(padding);
-  // @include transition-duration(0s);
-  // @include transition-delay(.2s);
 
   &.catbus--left {
     .catbus-open & {
       @media (min-width: $screen-lg) {
         padding-left: $catbus-nav-width;
-        // @include transition-delay(0);
       }
     }
   }
@@ -27,7 +26,6 @@ $screen-lg: 1200px !default;
     .catbus-open & {
       @media (min-width: $screen-lg) {
         padding-right: $catbus-nav-width;
-        // @include transition-delay(0);
       }
     }
   }
@@ -78,9 +76,13 @@ $screen-lg: 1200px !default;
       top: 0;
       right: 0;
 
+      // @include apply-origin(right top);
       @include experimental(transform-origin, right top,
         -moz, -webkit, -ms, -o, not -khtml, official
       );
+
+      @include border-top-radius(0);
+      border-top: 0;
 
       @include rotateZ(-90deg);
 
@@ -105,6 +107,7 @@ $screen-lg: 1200px !default;
       bottom: 100%;
       right: 100%;
 
+      // @include apply-origin(right bottom);
       @include experimental(transform-origin, right bottom,
         -moz, -webkit, -ms, -o, not -khtml, official
       );
@@ -161,9 +164,7 @@ $screen-lg: 1200px !default;
   }
 
   .catbus--top & {
-    @include transition-property(transform);
-    @include transition-duration(.25s);
-    @include transition-delay(0);
+    @include single-transition(transform, .25s);
 
     .catbus-open & {
       @media (min-width: $screen-lg) {
@@ -211,8 +212,8 @@ $screen-lg: 1200px !default;
 
   .carrot {
     line-height: inherit;
-    @include transition-property(transform);
-    @include transition-duration(.25s);
+
+    @include single-transition(transform, .25s);
 
     @media (max-width: $screen-sm - 1) {
       display: none;

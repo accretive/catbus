@@ -1,6 +1,29 @@
 .catbus__nav {
+
+  .catbus--right & {
+    & > button {
+      @include border-bottom-radius(0);
+      border-bottom: 0;
+    }
+  }
+
+  .catbus--left & {
+    & > button {
+      @include border-top-radius(0);
+      border-top: 0;
+    }
+  }
+
+  & > button {
+    &:active,
+    &:focus {
+      outline: 0;
+    }
+  }
+
   .well {
     min-height: 500px;
+    @include border-radius(0);
   }
 }
 
