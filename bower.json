@@ -1,6 +1,7 @@
 {
   "name": "catbus",
   "version": "0.1.0",
+  "main": "_catbus.scss",
   "authors": [
     "Daryl Roberts <d@rbrts.io>"
   ],
