@@ -48,6 +48,7 @@ $screen-lg: 1200px !default;
     padding: 0 1em;
     text-transform: uppercase;
     text-align: left;
+    margin: 0;
 
     @media (max-width: $screen-lg - 1) {
       display: none;
@@ -77,9 +78,6 @@ $screen-lg: 1200px !default;
       @include experimental(transform-origin, right top,
         -moz, -webkit, -ms, -o, not -khtml, official
       );
-
-      @include border-top-radius(0);
-      border-top: 0;
 
       @include rotateZ(-90deg);
 
@@ -150,7 +148,7 @@ $screen-lg: 1200px !default;
   padding-top: $catbus-top-gap;
 
   .catbus--top & {
-    @include single-transition(transform, .25s);
+    @include transition(transform .25s);
 
     .catbus-open & {
       @media (min-width: $screen-lg) {
@@ -194,21 +192,19 @@ $screen-lg: 1200px !default;
 
   @media (min-width: $screen-sm) {
     width: $catbus-nav-width;
-    border-right: 1px solid;
   }
 
   @media (min-width: $screen-lg) {
     &.catbus--left,
     &.catbus--right {
       display: none;
-      border-right-width: 0;
     }
   }
 
   .carrot {
     line-height: inherit;
 
-    @include single-transition(transform, .25s);
+    @include transition(transform .25s);
 
     @media (max-width: $screen-sm - 1) {
       display: none;
