@@ -150,7 +150,7 @@ $screen-lg: 1200px !default;
   padding-top: $catbus-top-gap;
 
   .catbus--top & {
-    @include single-transition(transform, .25s);
+    @include transition(transform .25s);
 
     .catbus-open & {
       @media (min-width: $screen-lg) {
@@ -194,21 +194,19 @@ $screen-lg: 1200px !default;
 
   @media (min-width: $screen-sm) {
     width: $catbus-nav-width;
-    border-right: 1px solid;
   }
 
   @media (min-width: $screen-lg) {
     &.catbus--left,
     &.catbus--right {
       display: none;
-      border-right-width: 0;
     }
   }
 
   .carrot {
     line-height: inherit;
 
-    @include single-transition(transform, .25s);
+    @include transition(transform .25s);
 
     @media (max-width: $screen-sm - 1) {
       display: none;
