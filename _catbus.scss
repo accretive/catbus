@@ -1,6 +1,3 @@
-// Compass
-@import "components/harp-compass/scss/_compass.scss";
-
 $catbus-top-gap: 56px !default;
 $catbus-top-drop: 108px !default;
 $catbus-nav-width: 261px !default;
@@ -151,17 +148,6 @@ $screen-lg: 1200px !default;
   z-index: 20;
   background: white;
   padding-top: $catbus-top-gap;
-  padding-bottom: $catbus-top-gap;
-
-  @media (min-width: $screen-md) {
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-  }
-
-  @media (min-width: $screen-lg) {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
 
   .catbus--top & {
     @include single-transition(transform, .25s);
@@ -176,6 +162,15 @@ $screen-lg: 1200px !default;
 
 .catbus__article {
   position: relative;
+  margin: 0 auto;
+
+  @media (min-width: $screen-md) {
+    width: 95%;
+  }
+
+  @media (min-width: $screen-lg) {
+    width: 90%;
+  }
 
   & > header {
     position: absolute;
