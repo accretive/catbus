@@ -1,0 +1,19 @@
+{
+  "name": "catbus",
+  "version": "0.0.0",
+  "authors": [
+    "Daryl Roberts <d@rbrts.io>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.2.0",
+    "bootstrap": "~3.2.0"
+  }
+}

@@ -1,0 +1,229 @@
+$catbus-top-gap: 56px !default;
+$catbus-top-drop: 108px !default;
+$catbus-nav-width: 261px !default;
+
+$screen-xs: 480px !default;
+$screen-sm: 768px !default;
+$screen-md: 992px !default;
+$screen-lg: 1200px !default;
+
+.catbus {
+  position: relative;
+  @include clearfix;
+  // @include transition-property(padding);
+  // @include transition-duration(0s);
+  // @include transition-delay(.2s);
+
+  &.catbus--left {
+    .catbus-open & {
+      @media (min-width: $screen-lg) {
+        padding-left: $catbus-nav-width;
+        // @include transition-delay(0);
+      }
+    }
+  }
+
+  &.catbus--right {
+    .catbus-open & {
+      @media (min-width: $screen-lg) {
+        padding-right: $catbus-nav-width;
+        // @include transition-delay(0);
+      }
+    }
+  }
+}
+
+.catbus__nav {
+  position: absolute;
+  width: $catbus-nav-width;
+  right: 100%;
+  top: $catbus-top-gap / 2;
+  z-index: 30;
+  @include transition(transform .25s);
+
+  .catbus-open & {
+    @include translateX(100%);
+  }
+
+  & > button {
+    @include user-select(none);
+    position: absolute;
+    width: 75%;
+    line-height: 36px;
+    padding: 0 1em;
+    text-transform: uppercase;
+    text-align: left;
+
+    @media (max-width: $screen-lg - 1) {
+      display: none;
+    }
+
+    .carrot {
+      float: right;
+      line-height: inherit;
+      @include transition(transform .25s);
+    }
+  }
+
+  .catbus--left & {
+    @media (min-width: $screen-lg) {
+      right: 100%;
+
+      .catbus-open & {
+        @include translateX(100%);
+      }
+    }
+
+    & > button {
+      top: 0;
+      right: 0;
+
+      @include experimental(transform-origin, right top,
+        -moz, -webkit, -ms, -o, not -khtml, official
+      );
+
+      @include rotateZ(-90deg);
+
+      .carrot {
+        .catbus-open & {
+          @include rotateZ(180deg);
+        }
+      }
+    }
+  }
+
+  .catbus--right & {
+    @media (min-width: $screen-lg) {
+      left: 100%;
+
+      .catbus-open & {
+        @include translateX(-100%);
+      }
+    }
+
+    & > button {
+      bottom: 100%;
+      right: 100%;
+
+      @include experimental(transform-origin, right bottom,
+        -moz, -webkit, -ms, -o, not -khtml, official
+      );
+
+      @include rotateZ(-90deg);
+
+      .carrot {
+        @include rotateZ(-180deg);
+
+        .catbus-open & {
+          @include rotateZ(-360deg);
+        }
+      }
+    }
+  }
+
+  .catbus--top & {
+    @media (min-width: $screen-lg) {
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      height: $catbus-nav-width;
+      @include translateY(-42px);
+
+      .catbus-open & {
+        @media (min-width: $screen-lg) {
+          @include translateY(0);
+        }
+      }
+    }
+
+    & > button {
+      display: none;
+    }
+  }
+}
+
+.catbus__section {
+  position: relative;
+  z-index: 20;
+  background: white;
+  padding-top: $catbus-top-gap;
+  padding-bottom: $catbus-top-gap;
+
+  @media (min-width: $screen-md) {
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+  }
+
+  @media (min-width: $screen-lg) {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .catbus--top & {
+    @include transition-property(transform);
+    @include transition-duration(.25s);
+    @include transition-delay(0);
+
+    .catbus-open & {
+      @media (min-width: $screen-lg) {
+        @include translateY($catbus-top-drop);
+      }
+    }
+  }
+}
+
+.catbus__article {
+  position: relative;
+
+  & > header {
+    position: absolute;
+    bottom: 100%;
+    @media (max-width: $screen-sm - 1) {
+      right: 0;
+    }
+
+    @media (min-width: $screen-sm) {
+      left: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+    }
+  }
+}
+
+.catbus__button {
+  @include user-select(none);
+
+  @media (min-width: $screen-sm) {
+    width: $catbus-nav-width;
+    border-right: 1px solid;
+  }
+
+  @media (min-width: $screen-lg) {
+    &.catbus--left,
+    &.catbus--right {
+      display: none;
+      border-right-width: 0;
+    }
+  }
+
+  .carrot {
+    line-height: inherit;
+    @include transition-property(transform);
+    @include transition-duration(.25s);
+
+    @media (max-width: $screen-sm - 1) {
+      display: none;
+    }
+
+    @media (min-width: $screen-sm) {
+      float: right;
+    }
+
+    .catbus-open & {
+      @include rotateZ(-180deg);
+    }
+  }
+}
