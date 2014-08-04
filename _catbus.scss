@@ -148,6 +148,7 @@ $screen-lg: 1200px !default;
   z-index: 20;
   background: white;
   padding-top: $catbus-top-gap;
+  padding-bottom: $catbus-top-gap;
 
   .catbus--top & {
     @include transition(transform .25s);
