@@ -176,6 +176,11 @@ $screen-lg: 1200px !default;
     position: absolute;
     bottom: 100%;
     left: 0;
+    width: 100%;
+
+    @media (max-width: $screen-lg - 1) {
+      padding: 0 2.5%;
+    }
 
     h1, h2, h3, h4, h5, h6 {
       margin: 0;
