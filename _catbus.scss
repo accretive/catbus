@@ -10,22 +10,6 @@ $screen-lg: 1200px !default;
 .catbus {
   position: relative;
   @include clearfix;
-
-  &.catbus--left {
-    .catbus-open & {
-      @media (min-width: $screen-lg) {
-        padding-left: $catbus-nav-width;
-      }
-    }
-  }
-
-  &.catbus--right {
-    .catbus-open & {
-      @media (min-width: $screen-lg) {
-        padding-right: $catbus-nav-width;
-      }
-    }
-  }
 }
 
 .catbus__nav {
@@ -37,7 +21,7 @@ $screen-lg: 1200px !default;
   @include transition(transform .25s);
 
   .catbus-open & {
-    @include translateX(100%);
+    @include transform(translateX(100%));
   }
 
   & > button {
@@ -67,7 +51,7 @@ $screen-lg: 1200px !default;
       top: $catbus-top-gap / 2;
 
       .catbus-open & {
-        @include translateX(100%);
+        @include transform(translateX(100%));
       }
     }
 
@@ -75,16 +59,12 @@ $screen-lg: 1200px !default;
       top: 0;
       right: 0;
 
-      // @include apply-origin(right top);
-      @include experimental(transform-origin, right top,
-        -moz, -webkit, -ms, -o, not -khtml, official
-      );
-
-      @include rotateZ(-90deg);
+      @include transform-origin(right top);
+      @include transform(rotateZ(-90deg));
 
       .carrot {
         .catbus-open & {
-          @include rotateZ(180deg);
+          @include transform(rotateZ(180deg));
         }
       }
     }
@@ -96,7 +76,7 @@ $screen-lg: 1200px !default;
       top: $catbus-top-gap / 2;
 
       .catbus-open & {
-        @include translateX(-100%);
+        @include transform(translateX(-100%));
       }
     }
 
@@ -104,18 +84,14 @@ $screen-lg: 1200px !default;
       bottom: 100%;
       right: 100%;
 
-      // @include apply-origin(right bottom);
-      @include experimental(transform-origin, right bottom,
-        -moz, -webkit, -ms, -o, not -khtml, official
-      );
-
-      @include rotateZ(-90deg);
+      @include transform-origin(right bottom);
+      @include transform(rotateZ(-90deg));
 
       .carrot {
-        @include rotateZ(-180deg);
+        @include transform(rotateZ(-180deg));
 
         .catbus-open & {
-          @include rotateZ(-360deg);
+          @include transform(rotateZ(-360deg));
         }
       }
     }
@@ -128,11 +104,11 @@ $screen-lg: 1200px !default;
       left: 0;
       z-index: 10;
       height: $catbus-nav-width;
-      @include translateY(-42px);
+      @include transform(translateY(-42px));
 
       .catbus-open & {
         @media (min-width: $screen-lg) {
-          @include translateY(0);
+          @include transform(translateY(0));
         }
       }
     }
@@ -155,7 +131,23 @@ $screen-lg: 1200px !default;
 
     .catbus-open & {
       @media (min-width: $screen-lg) {
-        @include translateY($catbus-top-drop);
+        @include transform(translateY($catbus-top-drop));
+      }
+    }
+  }
+
+  .catbus--left & {
+    .catbus-open & {
+      @media (min-width: $screen-lg) {
+        padding-left: $catbus-nav-width;
+      }
+    }
+  }
+
+  .catbus--right & {
+    .catbus-open & {
+      @media (min-width: $screen-lg) {
+        padding-right: $catbus-nav-width;
       }
     }
   }
@@ -217,7 +209,29 @@ $screen-lg: 1200px !default;
     }
 
     .catbus-open & {
-      @include rotateZ(-180deg);
+      @include transform(rotateZ(-180deg));
+    }
+  }
+}
+
+.catbus__footer {
+  position: relative;
+
+  .catbus--top & {
+    .catbus-open & {
+      margin-bottom: $catbus-top-drop
+    }
+  }
+
+  .catbus--left & {
+    .catbus-open & {
+      margin-left: -$catbus-nav-width
+    }
+  }
+
+  .catbus--right & {
+    .catbus-open & {
+      margin-right: -$catbus-nav-width
     }
   }
 }

@@ -23,7 +23,7 @@
 
   .well {
     min-height: 500px;
-    @include border-radius(0);
+    @include prefixer(border-radius, 0, spec);
   }
 }
 
