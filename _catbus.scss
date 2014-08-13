@@ -8,17 +8,18 @@ $screen-md: 992px !default;
 $screen-lg: 1200px !default;
 
 .catbus {
+  overflow: hidden;
   position: relative;
-  @include clearfix;
 }
 
 .catbus__nav {
+  @include transition-property(transform);
+  @include transition-duration(.25s);
   position: absolute;
   width: $catbus-nav-width;
   right: 100%;
   top: 0;
-  z-index: 30;
-  @include transition(transform .25s);
+  z-index: 100;
 
   .catbus-open & {
     @include transform(translateX(100%));
@@ -39,14 +40,15 @@ $screen-lg: 1200px !default;
     }
 
     .carrot {
+      @include transition-property(transform);
+      @include transition-duration(.25s);
       float: right;
       line-height: inherit;
-      @include transition(transform .25s);
     }
   }
 
   .catbus--left & {
-    @media (min-width: $screen-lg) {
+    @media (min-width: $screen-md) {
       right: 100%;
       top: $catbus-top-gap / 2;
 
@@ -71,7 +73,7 @@ $screen-lg: 1200px !default;
   }
 
   .catbus--right & {
-    @media (min-width: $screen-lg) {
+    @media (min-width: $screen-md) {
       left: 100%;
       top: $catbus-top-gap / 2;
 
@@ -98,16 +100,17 @@ $screen-lg: 1200px !default;
   }
 
   .catbus--top & {
-    @media (min-width: $screen-lg) {
+    @media (min-width: $screen-md) {
+      z-index: 0;
       width: 100%;
-      top: 0;
       left: 0;
-      z-index: 10;
-      height: $catbus-nav-width;
+
+      height: $catbus-top-drop;
+      overflow: hidden;
       @include transform(translateY(-42px));
 
       .catbus-open & {
-        @media (min-width: $screen-lg) {
+        @media (min-width: $screen-md) {
           @include transform(translateY(0));
         }
       }
@@ -121,41 +124,59 @@ $screen-lg: 1200px !default;
 
 .catbus__section {
   position: relative;
-  z-index: 20;
-  background: white;
-  padding-top: $catbus-top-gap;
-  padding-bottom: $catbus-top-gap;
+  z-index: 50;
+  padding-top: $catbus-top-gap / 2;
 
   .catbus--top & {
-    @include transition(transform .25s);
+    @include transition-property(transform);
+    @include transition-duration(.25s);
 
     .catbus-open & {
-      @media (min-width: $screen-lg) {
+      @media (min-width: $screen-md) {
         @include transform(translateY($catbus-top-drop));
       }
     }
   }
 
   .catbus--left & {
+    @include transition(padding .25s);
+
     .catbus-open & {
-      @media (min-width: $screen-lg) {
+      @media (min-width: $screen-md) {
         padding-left: $catbus-nav-width;
       }
     }
   }
 
   .catbus--right & {
+    @include transition(padding .25s);
+
     .catbus-open & {
-      @media (min-width: $screen-lg) {
+      @media (min-width: $screen-md) {
         padding-right: $catbus-nav-width;
       }
     }
   }
 }
 
+.catbus__header {
+  position: relative;
+  width: 100%;
+  margin: 0 auto ($catbus-top-gap / 2);
+
+  @media (min-width: $screen-md) {
+    width: 95%;
+  }
+
+  @media (min-width: $screen-lg) {
+    width: 90%;
+  }
+}
+
 .catbus__article {
   position: relative;
   margin: 0 auto;
+  margin-top: $catbus-top-gap / 2;
 
   @media (min-width: $screen-md) {
     width: 95%;
@@ -196,9 +217,9 @@ $screen-lg: 1200px !default;
   }
 
   .carrot {
+    @include transition-property(transform);
+    @include transition-duration(.25s);
     line-height: inherit;
-
-    @include transition(transform .25s);
 
     @media (max-width: $screen-sm - 1) {
       display: none;
@@ -219,19 +240,46 @@ $screen-lg: 1200px !default;
 
   .catbus--top & {
     .catbus-open & {
-      margin-bottom: $catbus-top-drop
+      margin-bottom: $catbus-top-drop;
     }
   }
 
   .catbus--left & {
     .catbus-open & {
-      margin-left: -$catbus-nav-width
+      margin-left: -$catbus-nav-width;
     }
   }
 
   .catbus--right & {
     .catbus-open & {
-      margin-right: -$catbus-nav-width
+      margin-right: -$catbus-nav-width;
+    }
+  }
+}
+
+.catbus__tail {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  display: none;
+  position: absolute;
+  background: rgba(#000, 0.5);
+
+  @media (max-width: $screen-md - 1) {
+    .catbus-open & {
+      display: block;
+    }
+  }
+
+  @media (max-width: $screen-lg -1) {
+    .catbus--top & {
+      .catbus-open & {
+        display: block;
+      }
     }
   }
 }

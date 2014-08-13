@@ -1,19 +1,29 @@
 //- wunderbar
 .navbar.navbar-default.navbar-static-top.wunderbar
   .container-fluid
-    a.navbar-brand.catbus__button.catbus--left(js-catbus-button).
+    a.navbar-brand.catbus__button.catbus--top(js-catbus-button).
       Catbus Button <small class="glyphicon glyphicon-chevron-down carrot"></small>
 
     .pull-right
       a.navbar-brand Assumed Navbar
 
 //- catbus
-main.catbus.catbus--left
-  nav.catbus__nav
+div.catbus.catbus--top
+  nav.catbus__nav(js-catbus-nav)
     button.btn.btn-default(js-catbus-button) Catbus Button <small class="glyphicon glyphicon-chevron-down carrot"></small>
     .well Catbus Nav
 
   section.catbus__section
+    header.catbus__header
+      .well
+        .btn.btn-danger.pull-right Delete Me
+        | This is some sort of optional space where we can put things that we want.
+        ul
+          li User Notes
+          li Android Banner
+          li Basic User Upsells...
+
+
     article.catbus__article
       header
         h4 Catbus Title
@@ -22,11 +32,11 @@ main.catbus.catbus--left
           form#js-catbus-config.navbar-form.form-inline.pull-left
             | Catbus Config: &nbsp;
             .btn-group(data-toggle="buttons")
-              label.btn.btn-default.active
-                input(type="radio" name="catbus-config" checked value="left")
-                | Left
               label.btn.btn-default
-                input(type="radio" name="catbus-config" value="top")
+                input(type="radio" name="catbus-config" value="left")
+                | Left
+              label.btn.btn-default.active
+                input(type="radio" name="catbus-config" checked value="top")
                 | Top
               label.btn.btn-default
                 input(type="radio" name="catbus-config" value="right")
@@ -37,3 +47,5 @@ main.catbus.catbus--left
     footer.catbus__footer
       .well.demo
         p Footer
+
+  .catbus__tail(js-catbus-tail)

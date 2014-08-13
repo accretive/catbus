@@ -1,5 +1,10 @@
-.catbus__nav {
+.catbus {
+  .well {
+    @include prefixer(border-radius, 0, spec);
+  }
+}
 
+.catbus__nav {
   .catbus--right & {
     & > button {
       @include border-bottom-radius(0);
@@ -23,8 +28,12 @@
 
   .well {
     min-height: 500px;
-    @include prefixer(border-radius, 0, spec);
+    background: #333333;
   }
+}
+
+.catbus__section {
+  @include background-image(linear-gradient(top, rgba(#ffffff, 1) 0%,rgba(#777777, 1) 100%));
 }
 
 .catbus__article {
