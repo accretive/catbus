@@ -191,6 +191,7 @@ $disable-firefox-transform: true !default;
   position: relative;
   margin: 0 auto;
   margin-top: $catbus-top-gap / 2;
+  padding-bottom: $catbus-top-gap / 2;
 
   @media (min-width: $screen-md) {
     width: 95%;
