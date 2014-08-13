@@ -7,6 +7,8 @@ $screen-sm: 768px !default;
 $screen-md: 992px !default;
 $screen-lg: 1200px !default;
 
+$disable-firefox-transform: true !default;
+
 .catbus {
   overflow: hidden;
   position: relative;
@@ -126,14 +128,26 @@ $screen-lg: 1200px !default;
   position: relative;
   z-index: 50;
   padding-top: $catbus-top-gap / 2;
+  top: 0;
 
   .catbus--top & {
-    @include transition-property(transform);
+    @include transition-property(transform, top);
     @include transition-duration(.25s);
 
     .catbus-open & {
       @media (min-width: $screen-md) {
         @include transform(translateY($catbus-top-drop));
+
+        @if $disable-firefox-transform {
+
+          // Firefox only CSS selector.  Disables TranslateY because Firefox
+          // can't use wmode=direct as a child of an element thats had a
+          // transform applied to it.
+          &, x:-moz-any-link, x:default {
+            @include transform(none);
+            top: $catbus-top-drop;
+          }
+        }
       }
     }
   }
