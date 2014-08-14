@@ -12,6 +12,7 @@ $disable-firefox-transform: true !default;
 .catbus {
   overflow: hidden;
   position: relative;
+  z-index: 10;
 }
 
 .catbus__nav {
@@ -160,6 +161,10 @@ $disable-firefox-transform: true !default;
         padding-left: $catbus-nav-width;
       }
     }
+
+    .touch & {
+      @include transform(translateZ(0));
+    }
   }
 
   .catbus--right & {
@@ -169,6 +174,10 @@ $disable-firefox-transform: true !default;
       @media (min-width: $screen-md) {
         padding-right: $catbus-nav-width;
       }
+    }
+
+    .touch & {
+      @include transform(translateZ(0));
     }
   }
 }
