@@ -9,10 +9,31 @@ $screen-lg: 1200px !default;
 
 $disable-firefox-transform: true !default;
 
+#js-naiad {
+  content: "mobile-portrait";
+
+  @media (min-width: $screen-xs) {
+    content: "mobile-landscape";
+  }
+
+  @media (min-width: $screen-sm) {
+    content: "tablet-portrait";
+  }
+
+  @media (min-width: $screen-md) {
+    content: "tablet-landscape";
+  }
+
+  @media (min-width: $screen-lg) {
+    content: "desktop";
+  }
+}
+
 .catbus {
   overflow: hidden;
   position: relative;
   z-index: 10;
+  width: 100%;
 }
 
 .catbus__nav {
@@ -55,8 +76,10 @@ $disable-firefox-transform: true !default;
       right: 100%;
       top: $catbus-top-gap / 2;
 
-      .catbus-open & {
-        @include transform(translateX(100%));
+      @media (min-width: $screen-md) {
+        .catbus-pinned & {
+          @include transform(translateX(100%));
+        }
       }
     }
 
@@ -154,30 +177,20 @@ $disable-firefox-transform: true !default;
   }
 
   .catbus--left & {
-    @include transition(padding .25s);
-
-    .catbus-open & {
-      @media (min-width: $screen-md) {
+    @media (min-width: $screen-md) {
+      .catbus-pinned &,
+      .catbus-open & {
         padding-left: $catbus-nav-width;
       }
-    }
-
-    .touch & {
-      @include transform(translateZ(0));
     }
   }
 
   .catbus--right & {
-    @include transition(padding .25s);
-
-    .catbus-open & {
-      @media (min-width: $screen-md) {
+    @media (min-width: $screen-md) {
+      .catbus-open &,
+      .catbus-pinned & {
         padding-right: $catbus-nav-width;
       }
-    }
-
-    .touch & {
-      @include transform(translateZ(0));
     }
   }
 }
@@ -266,17 +279,35 @@ $disable-firefox-transform: true !default;
     .catbus-open & {
       margin-bottom: $catbus-top-drop;
     }
+
+    .catbus-pinned & {
+      @media (min-width: $screen-md) {
+        margin-bottom: $catbus-top-drop;
+      }
+    }
   }
 
   .catbus--left & {
     .catbus-open & {
       margin-left: -$catbus-nav-width;
     }
+
+    .catbus-pinned & {
+      @media (min-width: $screen-md) {
+        margin-left: -$catbus-nav-width;
+      }
+    }
   }
 
   .catbus--right & {
     .catbus-open & {
       margin-right: -$catbus-nav-width;
+    }
+
+    .catbus-pinned & {
+      @media (min-width: $screen-md) {
+        margin-left: $catbus-nav-width;
+      }
     }
   }
 }
