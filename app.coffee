@@ -1,21 +1,20 @@
 $ ->
 
-  catbusConfig = 'top'
+  catbusConfig = 'left'
 
   catbusOpen = false
   catbusOpenSpeed = 250
 
   catbusPinned = false
-  catbusNavWidth = 261
   catbusNavHeight = 108
 
   $('[js-catbus-tail]').on 'click', ->
     catbusOpen = !catbusOpen
-    $('body').toggleClass 'catbus-open', catbusOpen
+    $('body').toggleClass 'catbus--open', catbusOpen
 
   $('[js-catbus-button]').on 'click', ->
     catbusOpen = !catbusOpen
-    $('body').toggleClass 'catbus-open', catbusOpen
+    $('body').toggleClass 'catbus--open', catbusOpen
 
     # if catbusConfig is 'left'
     #   if catbusOpen then paddingLeft = catbusNavWidth

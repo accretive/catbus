@@ -4,20 +4,7 @@
   }
 }
 
-.catbus__nav {
-  .catbus--right & {
-    & > button {
-      @include border-bottom-radius(0);
-      border-bottom: 0;
-    }
-  }
-
-  .catbus--left & {
-    & > button {
-      @include border-top-radius(0);
-      border-top: 0;
-    }
-  }
+.catbus__aside {
 
   & > button {
     &:active,
@@ -29,15 +16,39 @@
   .well {
     min-height: 500px;
     background: #333333;
+    color: #dddddd;
+    border-color: #666666;
   }
-}
 
-.catbus__section {
-  @include background-image(linear-gradient(top, rgba(#ffffff, 1) 0%,rgba(#777777, 1) 100%));
+  .catbus--right & {
+    & > button {
+      @include border-bottom-radius(0);
+      border-bottom: 0;
+    }
+
+    .well {
+      border-right: 0;
+    }
+  }
+
+  .catbus--left & {
+    & > button {
+      @include border-top-radius(0);
+      border-top: 0;
+    }
+
+    .well {
+      border-left: 0;
+    }
+  }
 }
 
 .catbus__article {
   .well {
     min-height: 1000px;
   }
+}
+
+.catbus__section {
+  @include background-image(linear-gradient(top, rgba(#ffffff, 1) 0%,rgba(#777777, 1) 100%));
 }

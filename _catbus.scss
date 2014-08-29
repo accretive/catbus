@@ -1,13 +1,23 @@
-$catbus-top-gap: 56px !default;
-$catbus-top-drop: 108px !default;
-$catbus-nav-width: 261px !default;
-
+// Screen Sizes
+// These are defined in bootstrap.  Redefined here so they can be overridden
+// as necessary.
 $screen-xs: 480px !default;
 $screen-sm: 768px !default;
 $screen-md: 992px !default;
 $screen-lg: 1200px !default;
 
-$disable-firefox-transform: true !default;
+$catbus-top-gap: 56px !default;
+$catbus-top-drop: 108px !default;
+$catbus-aside-width: 261px !default;
+
+// Options: none, small, medium, large
+$catbus-margin-size: medium !default;
+$catbus-margin-small: 44px;
+$catbus-margin-medium: 60px;
+$catbus-margin-large: 85px;
+
+$catbus-animate-padding: true !default;
+$catbus-disable-firefox-transform: false !default;
 
 .catbus {
   overflow: hidden;
@@ -16,16 +26,16 @@ $disable-firefox-transform: true !default;
   width: 100%;
 }
 
-.catbus__nav {
+.catbus__aside {
   @include transition-property(transform);
   @include transition-duration(.25s);
   position: absolute;
-  width: $catbus-nav-width;
+  width: $catbus-aside-width;
   right: 100%;
   top: 0;
   z-index: 100;
 
-  .catbus-open & {
+  .catbus--open & {
     @include transform(translateX(100%));
   }
 
@@ -71,7 +81,7 @@ $disable-firefox-transform: true !default;
       @include transform(rotateZ(-90deg));
 
       .carrot {
-        .catbus-open & {
+        .catbus--open & {
           @include transform(rotateZ(180deg));
         }
       }
@@ -83,7 +93,7 @@ $disable-firefox-transform: true !default;
       left: 100%;
       top: $catbus-top-gap / 2;
 
-      .catbus-open & {
+      .catbus--open & {
         @include transform(translateX(-100%));
       }
     }
@@ -98,7 +108,7 @@ $disable-firefox-transform: true !default;
       .carrot {
         @include transform(rotateZ(-180deg));
 
-        .catbus-open & {
+        .catbus--open & {
           @include transform(rotateZ(-360deg));
         }
       }
@@ -115,7 +125,7 @@ $disable-firefox-transform: true !default;
       overflow: hidden;
       @include transform(translateY(-42px));
 
-      .catbus-open & {
+      .catbus--open & {
         @include transform(translateY(0));
       }
     }
@@ -129,18 +139,39 @@ $disable-firefox-transform: true !default;
 .catbus__section {
   position: relative;
   z-index: 50;
-  padding-top: $catbus-top-gap / 2;
   top: 0;
+
+  @if $catbus-animate-padding {
+    @include transition(padding .25s);
+  }
+
+  .catbus--left & {
+    @media (min-width: $screen-md) {
+      .catbus-pinned &,
+      .catbus--open & {
+        padding-left: $catbus-aside-width;
+      }
+    }
+  }
+
+  .catbus--right & {
+    @media (min-width: $screen-md) {
+      .catbus--open &,
+      .catbus-pinned & {
+        padding-right: $catbus-aside-width;
+      }
+    }
+  }
 
   .catbus--top & {
     @include transition-property(transform, top);
     @include transition-duration(.25s);
 
-    .catbus-open & {
+    .catbus--open & {
       @media (min-width: $screen-md) {
         @include transform(translateY($catbus-top-drop));
 
-        @if $disable-firefox-transform {
+        @if $catbus-disable-firefox-transform {
 
           // Firefox only CSS selector.  Disables TranslateY because Firefox
           // can't use wmode=direct as a child of an element thats had a
@@ -153,21 +184,50 @@ $disable-firefox-transform: true !default;
       }
     }
   }
+}
 
-  .catbus--left & {
-    @media (min-width: $screen-md) {
-      .catbus-pinned &,
-      .catbus-open & {
-        padding-left: $catbus-nav-width;
+.catbus__body {
+  padding-top: $catbus-top-gap / 2;
+
+  @media (min-width: $screen-md) {
+    .catbus--left & {
+      @if $catbus-margin-size == none {
+        padding-left: 38px;
+        padding-right: 0;
+      }
+    }
+
+    .catbus--right & {
+      @if $catbus-margin-size == none {
+        padding-left: 0;
+        padding-right: 38px;
       }
     }
   }
 
-  .catbus--right & {
-    @media (min-width: $screen-md) {
-      .catbus-open &,
-      .catbus-pinned & {
-        padding-right: $catbus-nav-width;
+  @media (min-width: $screen-lg) {
+    @if $catbus-margin-size == small {
+      padding-left: $catbus-margin-small;
+      padding-right: $catbus-margin-small;
+    } @else if $catbus-margin-size == medium {
+      padding-left: $catbus-margin-medium;
+      padding-right: $catbus-margin-medium;
+    } @else if $catbus-margin-size == large {
+      padding-left: $catbus-margin-large;
+      padding-right: $catbus-margin-large;
+    }
+
+    .catbus--left & {
+      @if $catbus-margin-size == none {
+        padding-left: 38px;
+        padding-right: 0;
+      }
+    }
+
+    .catbus--right & {
+      @if $catbus-margin-size == none {
+        padding-left: 0;
+        padding-right: 38px;
       }
     }
   }
@@ -178,12 +238,9 @@ $disable-firefox-transform: true !default;
   width: 100%;
   margin: 0 auto ($catbus-top-gap / 2);
 
-  @media (min-width: $screen-md) {
-    width: 95%;
-  }
-
-  @media (min-width: $screen-lg) {
-    width: 90%;
+  @if $catbus-margin-size == none {
+    padding-left: 1em;
+    padding-right: 1em;
   }
 }
 
@@ -192,14 +249,6 @@ $disable-firefox-transform: true !default;
   margin: 0 auto;
   margin-top: $catbus-top-gap / 2;
   padding-bottom: $catbus-top-gap / 2;
-
-  @media (min-width: $screen-md) {
-    width: 95%;
-  }
-
-  @media (min-width: $screen-lg) {
-    width: 90%;
-  }
 
   & > header {
     position: absolute;
@@ -221,7 +270,7 @@ $disable-firefox-transform: true !default;
   @include user-select(none);
 
   @media (min-width: $screen-sm) {
-    width: $catbus-nav-width;
+    width: $catbus-aside-width;
   }
 
   @media (min-width: $screen-lg) {
@@ -244,7 +293,7 @@ $disable-firefox-transform: true !default;
       float: right;
     }
 
-    .catbus-open & {
+    .catbus--open & {
       @include transform(rotateZ(-180deg));
     }
   }
@@ -254,7 +303,7 @@ $disable-firefox-transform: true !default;
   position: relative;
 
   .catbus--top & {
-    .catbus-open & {
+    .catbus--open & {
       margin-bottom: $catbus-top-drop;
     }
 
@@ -266,25 +315,25 @@ $disable-firefox-transform: true !default;
   }
 
   .catbus--left & {
-    .catbus-open & {
-      margin-left: -$catbus-nav-width;
+    .catbus--open & {
+      margin-left: -$catbus-aside-width;
     }
 
     .catbus-pinned & {
       @media (min-width: $screen-md) {
-        margin-left: -$catbus-nav-width;
+        margin-left: -$catbus-aside-width;
       }
     }
   }
 
   .catbus--right & {
-    .catbus-open & {
-      margin-right: -$catbus-nav-width;
+    .catbus--open & {
+      margin-right: -$catbus-aside-width;
     }
 
     .catbus-pinned & {
       @media (min-width: $screen-md) {
-        margin-left: $catbus-nav-width;
+        margin-left: $catbus-aside-width;
       }
     }
   }
@@ -303,14 +352,14 @@ $disable-firefox-transform: true !default;
   background: rgba(#000, 0.5);
 
   @media (max-width: $screen-md - 1) {
-    .catbus-open & {
+    .catbus--open & {
       display: block;
     }
   }
 
   @media (max-width: $screen-lg -1) {
     .catbus--top & {
-      .catbus-open & {
+      .catbus--open & {
         display: block;
       }
     }
