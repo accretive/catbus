@@ -6,17 +6,18 @@ $screen-sm: 768px !default;
 $screen-md: 992px !default;
 $screen-lg: 1200px !default;
 
+// General Options
 $catbus-top-gap: 56px !default;
 $catbus-top-drop: 108px !default;
 $catbus-aside-width: 261px !default;
 
-// Options: none, small, medium, large
+// Margin Options: none, small, medium, large
 $catbus-margin-size: medium !default;
-$catbus-margin-small: 44px;
-$catbus-margin-medium: 60px;
-$catbus-margin-large: 85px;
+$catbus-margin-small: 44px !default;
+$catbus-margin-medium: 60px !default;
+$catbus-margin-large: 85px !default;
 
-$catbus-animate-padding: true !default;
+$catbus-animate-padding: false !default;
 $catbus-disable-firefox-transform: false !default;
 
 .catbus {
@@ -67,7 +68,7 @@ $catbus-disable-firefox-transform: false !default;
       top: $catbus-top-gap / 2;
 
       @media (min-width: $screen-md) {
-        .catbus-pinned & {
+        .catbus--pinned & {
           @include transform(translateX(100%));
         }
       }
@@ -147,7 +148,7 @@ $catbus-disable-firefox-transform: false !default;
 
   .catbus--left & {
     @media (min-width: $screen-md) {
-      .catbus-pinned &,
+      .catbus--pinned &,
       .catbus--open & {
         padding-left: $catbus-aside-width;
       }
@@ -157,7 +158,7 @@ $catbus-disable-firefox-transform: false !default;
   .catbus--right & {
     @media (min-width: $screen-md) {
       .catbus--open &,
-      .catbus-pinned & {
+      .catbus--pinned & {
         padding-right: $catbus-aside-width;
       }
     }
@@ -307,7 +308,7 @@ $catbus-disable-firefox-transform: false !default;
       margin-bottom: $catbus-top-drop;
     }
 
-    .catbus-pinned & {
+    .catbus--pinned & {
       @media (min-width: $screen-md) {
         margin-bottom: $catbus-top-drop;
       }
@@ -319,7 +320,7 @@ $catbus-disable-firefox-transform: false !default;
       margin-left: -$catbus-aside-width;
     }
 
-    .catbus-pinned & {
+    .catbus--pinned & {
       @media (min-width: $screen-md) {
         margin-left: -$catbus-aside-width;
       }
@@ -331,7 +332,7 @@ $catbus-disable-firefox-transform: false !default;
       margin-right: -$catbus-aside-width;
     }
 
-    .catbus-pinned & {
+    .catbus--pinned & {
       @media (min-width: $screen-md) {
         margin-left: $catbus-aside-width;
       }
