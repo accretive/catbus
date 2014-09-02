@@ -1,0 +1,66 @@
+@import "bower_components/neat/app/assets/stylesheets/neat";
+
+// Screen Sizes
+// These are defined in bootstrap.  Redefined here so they can be overridden
+// as necessary.
+$screen-xs: 480px !default;
+$screen-sm: 768px !default;
+$screen-md: 992px !default;
+$screen-lg: 1200px !default;
+
+
+// Grid Gutter sizes
+$flynns-gutter-size: none !default;
+$flynns-gutter-none: 2000 !default;
+$flynns-gutter-small: 15 !default;
+$flynns-gutter-medium: 12 !default;
+$flynns-gutter-large: 15 !default;
+
+// This takes in the number of total colums you want in the block, and the
+// total number of columns you want to build the grid off of.  The larger the
+// $total the smaller the space between the blocks.
+@mixin pixel($columns, $total) {
+  @include span-columns(($total / $columns) of $total);
+  @include omega(#{$columns}n);
+  margin-bottom: flex-gutter($total);
+}
+
+.flynns {
+  @include outer-container;
+  max-width: 100%;
+
+  li {
+    // iPhone portrait
+    @media (max-width: $screen-xs - 1) {
+      @if $flynns-gutter-size == none {
+        @include pixel(2, 2 * $flynns-gutter-small);
+      }
+    }
+
+    // iPhone landscape -> iPad Portrait
+    @media (min-width: $screen-xs) and (max-width: $screen-md - 1) {
+      @if $flynns-gutter-size == none {
+        @include pixel(3, 3 * $flynns-gutter-small);
+      }
+    }
+
+    // > iPad landscape -> Small desktop
+    @media (min-width: $screen-md) and (max-width: $screen-lg - 1 ) {
+      @if $flynns-gutter-size == none {
+        @include pixel(4, 4 * $flynns-gutter-small);
+      }
+    }
+
+    @media (min-width: $screen-lg) {
+      @if $flynns-gutter-size == none {
+        @include pixel(5, 5 * $flynns-gutter-small);
+      }
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+

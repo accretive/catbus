@@ -27,26 +27,15 @@ div.catbus.catbus--left
             li Banners
             li Upsells...
 
-
       article.catbus__article
         header
           h4 Catbus Title
-        .well.demo
-          .pull-right
-            form#js-catbus-config.navbar-form.form-inline.pull-left
-              | Catbus Config: &nbsp;
-              .btn-group(data-toggle="buttons")
-                label.btn.btn-default.active
-                  input(type="radio" name="catbus-config" checked value="left")
-                  | Left
-                label.btn.btn-default
-                  input(type="radio" name="catbus-config" value="top")
-                  | Top
-                label.btn.btn-default
-                  input(type="radio" name="catbus-config" value="right")
-                  | Right
 
-          | Catbus Body.  Search results go here.
+        //- .well.demo
+        //-   p Catbus Body.  Search results go here.
+
+        include _flynns
+
 
     footer.catbus__footer
       .well.demo

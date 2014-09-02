@@ -44,4 +44,4 @@ $ ->
     catbusConfig = e.target.value
 
   $('.catbus__header .btn').on 'click', ->
-    $('.catbus__header').remove()
+    $(this).parent().remove()

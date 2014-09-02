@@ -1,12 +1,15 @@
 // Bootstrap
 $icon-font-path: "bower_components/bootstrap/dist/fonts/";
-@import "bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/bootstrap.scss";
+@import "bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/bootstrap";
 
 // Catbus base
-@import "_build.scss";
+@import "_build";
 
 // Catbus theme
-@import "_catbus-theme.scss";
+@import "_catbus-theme";
+
+// Flynn's
+@import "_the-grid";
 
 .wunderbar {
   margin: 0;

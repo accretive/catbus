@@ -14,8 +14,8 @@ $catbus-aside-width: 261px !default;
 // Margin Options: none, small, medium, large
 $catbus-margin-size: medium !default;
 $catbus-margin-small: 44px !default;
-$catbus-margin-medium: 60px !default;
-$catbus-margin-large: 85px !default;
+$catbus-margin-medium: 64px !default;
+$catbus-margin-large: 100px !default;
 
 $catbus-animate-padding: false !default;
 $catbus-disable-firefox-transform: false !default;
@@ -191,6 +191,11 @@ $catbus-disable-firefox-transform: false !default;
   padding-top: $catbus-top-gap / 2;
 
   @media (min-width: $screen-md) {
+    @if $catbus-margin-size != none {
+      padding-left: $catbus-margin-small / 2;
+      padding-right: $catbus-margin-small / 2;
+    }
+
     .catbus--left & {
       @if $catbus-margin-size == none {
         padding-left: 38px;
