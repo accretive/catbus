@@ -1,0 +1,72 @@
+@import "bower_components/neat/app/assets/stylesheets/neat";
+
+.flynns {
+
+  // Screen Sizes
+  // These are defined in bootstrap.  Redefined here so they can be overridden
+  // as necessary.
+  $screen-xs: 480px !default;
+  $screen-sm: 768px !default;
+  $screen-md: 992px !default;
+  $screen-lg: 1200px !default;
+
+
+  // Grid Gutter size.
+  // values: none (anything), small, medium, large
+  $flynns-gutter-size: medium !default;
+
+  $flynns-gutter-none: 1000 !default;
+  $flynns-gutter-small: 20 !default;
+  $flynns-gutter-medium: 5 !default;
+  $flynns-gutter-large: 2 !default;
+
+  // Default to no gutter, upgrade if necessary.
+  $flynns-gutter-value: $flynns-gutter-none;
+
+  @if $flynns-gutter-size == small {
+    $flynns-gutter-value: $flynns-gutter-small;
+  } @else if $flynns-gutter-size == medium {
+    $flynns-gutter-value: $flynns-gutter-medium;
+  } @else if $flynns-gutter-size == large {
+    $flynns-gutter-value: $flynns-gutter-large;
+  }
+
+  // This takes in the number of total colums you want in the block, and the
+  // total number of columns you want to build the grid off of.  The larger the
+  // $total the smaller the space between the blocks.
+  @mixin pixel($columns, $total) {
+    @include span-columns(($total / $columns) of $total);
+    @include omega(#{$columns}n);
+    margin-bottom: flex-gutter($total);
+  }
+
+  @include outer-container;
+  max-width: 100%;
+
+  .pixel {
+    // iPhone portrait
+    @media (max-width: $screen-xs - 1) {
+      @include pixel(2, 2 * $flynns-gutter-value);
+    }
+
+    // iPhone landscape -> iPad Portrait
+    @media (min-width: $screen-xs) and (max-width: $screen-md - 1) {
+      @include pixel(3, 3 * $flynns-gutter-value);
+    }
+
+    // > iPad landscape -> Small desktop
+    @media (min-width: $screen-md) and (max-width: $screen-lg - 1 ) {
+      @include pixel(4, 4 * $flynns-gutter-value);
+    }
+
+    @media (min-width: $screen-lg) {
+      @include pixel(5, 5 * $flynns-gutter-value);
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+
