@@ -1,6 +1,7 @@
 .catbus {
   .well {
     @include prefixer(border-radius, 0, spec);
+    margin: 0;
   }
 }
 
