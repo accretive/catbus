@@ -176,45 +176,21 @@ $disable-firefox-transform: true !default;
 .catbus__header {
   position: relative;
   width: 100%;
-  margin: 0 auto ($catbus-top-gap / 2);
+  margin-bottom: 8px;
 
-  @media (min-width: $screen-md) {
-    width: 95%;
+  @media #{$media-sm} {
+    margin-bottom: 16px;
   }
 
-  @media (min-width: $screen-lg) {
-    width: 90%;
+  @media #{$media-md} {
+    margin-bottom: 28px;
   }
+
 }
 
 .catbus__article {
   position: relative;
-  margin: 0 auto;
-  margin-top: $catbus-top-gap / 2;
   padding-bottom: $catbus-top-gap / 2;
-
-  @media (min-width: $screen-md) {
-    width: 95%;
-  }
-
-  @media (min-width: $screen-lg) {
-    width: 90%;
-  }
-
-  & > header {
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    width: 100%;
-
-    @media (max-width: $screen-md - 1) {
-      padding: 0 2.5%;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      margin: 0;
-    }
-  }
 }
 
 .catbus__button {
