@@ -176,16 +176,6 @@ $disable-firefox-transform: true !default;
 .catbus__header {
   position: relative;
   width: 100%;
-  margin-bottom: 8px;
-
-  @media #{$media-sm} {
-    margin-bottom: 16px;
-  }
-
-  @media #{$media-md} {
-    margin-bottom: 28px;
-  }
-
 }
 
 .catbus__article {
