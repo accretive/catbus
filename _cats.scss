@@ -1,0 +1,36 @@
+.cats {
+
+
+}
+
+
+.cats__container {
+
+  @media #{$media-md} {
+    .catbus-top & {
+      @include display(flex);
+    }
+  }
+
+
+}
+
+
+.cats__tabs {
+  width: 100%;
+
+  @media #{$media-md} {
+    .catbus-top & {
+      @include flex(none);
+      width: $catbus-nav-width;
+    }
+  }
+}
+
+.cats__content {
+  @media #{$media-md} {
+    .catbus-top & {
+      @include flex(auto);
+    }
+  }
+}

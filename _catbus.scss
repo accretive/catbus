@@ -21,10 +21,16 @@ $catbus-transition-duration: .25s !default;
 // This is about 81% of the width of the iPhone 4 screen.
 // Easily divisible by 3 and 2.
 $catbus-nav-width: 264px !default;
-$catbus-top-offset: 0 !default;
+
+// Again 3 and 2, with the default (3) tabs being 36px each.
+$catbus-nav-height: 108px !default;
+
+$catbus-nav-offset: 0 !default;
 
 // This is what you would normally use as a bottom margin on the navbar.
 $catbus-top-padding: 20px !default;
+
+$catbus-gutter: 5% !default;
 
 .catbus {
   position: relative;
@@ -36,11 +42,11 @@ $catbus-top-padding: 20px !default;
 .catbus__container {
   width: 100%;
   height: 100%;
-  @include transition-property(width, margin-left);
   @include transition-duration($catbus-transition-duration);
 
-
   @media #{$media-md} {
+    @include transition-property(width, margin);
+
     .catbus-left & {
       @include display(flex);
       width: unquote("calc(100% + #{$catbus-nav-width})");
@@ -52,25 +58,25 @@ $catbus-top-padding: 20px !default;
       width: unquote("calc(100% + #{$catbus-nav-width})");
     }
 
+    .catbus-top & {
+      margin-top: -$catbus-nav-height;
+    }
+
     .catbus-open & {
       width: 100%;
-      margin-left: 0;
+      margin: 0;
     }
   }
 }
 
 .catbus__nav {
   z-index: 30; // Above the Tail
-
-  .catbus-left &,
-  .catbus-right & {
-    width: $catbus-nav-width;
-  }
+  width: $catbus-nav-width;
 
   @media #{$media-sm-max} {
     position: absolute;
     right: 100%;
-    top: $catbus-top-offset;
+    top: $catbus-nav-offset;
 
     @include transition-property(transform);
     @include transition-duration($catbus-transition-duration);
@@ -91,8 +97,12 @@ $catbus-top-padding: 20px !default;
       @include flex(none);
       @include order(1);
     }
-  }
 
+    .catbus-top & {
+      width: 100%;
+      height: $catbus-nav-height;
+    }
+  }
 
   .catbus__button {
     position: absolute;
@@ -120,8 +130,15 @@ $catbus-top-padding: 20px !default;
   @include transition-duration($catbus-transition-duration);
   @include transition-property(padding-left, padding-right, top);
 
-  // Starting with medium screens we're shaking things up.
+  @media #{$media-sm} {
+    padding-left: $catbus-gutter / 2;
+    padding-right: $catbus-gutter / 2;
+  }
+
   @media #{$media-md} {
+    padding-left: $catbus-gutter;
+    padding-right: $catbus-gutter;
+
     .catbus-left &,
     .catbus-right & {
       @include flex(auto);
@@ -137,6 +154,14 @@ $catbus-top-padding: 20px !default;
 
     .catbus-open & {
       @include transform(rotateZ(-180deg));
+    }
+  }
+
+  // Hide the button on smaller screens
+  @media #{$media-sm-max} {
+    .catbus-left .catbus__nav &,
+    .catbus-right .catbus__nav & {
+      display: none;
     }
   }
 
@@ -169,3 +194,5 @@ $catbus-top-padding: 20px !default;
     }
   }
 }
+
+@import "cats";
