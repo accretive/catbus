@@ -1,284 +1,171 @@
-$catbus-top-gap: 56px !default;
-$catbus-top-drop: 108px !default;
-$catbus-nav-width: 261px !default;
-
 $screen-xs: 480px !default;
 $screen-sm: 768px !default;
 $screen-md: 992px !default;
 $screen-lg: 1200px !default;
 
-$disable-firefox-transform: true !default;
+$media-xs: "only screen and (min-width: #{$screen-xs})";
+$media-xs-max: "only screen and (max-width: #{$screen-sm - 1})";
+
+$media-sm: "only screen and (min-width: #{$screen-sm})";
+$media-sm-max: "only screen and (max-width: #{$screen-md - 1})";
+
+$media-md: "only screen and (min-width: #{$screen-md})";
+$media-md-max: "only screen and (max-width: #{$screen-lg - 1})";
+
+$media-lg: "only screen and (min-width: #{$screen-lg})";
+
+
+$catbus-caret-class: glyphicon !default;
+$catbus-transition-duration: .25s !default;
+
+// This is about 81% of the width of the iPhone 4 screen.
+// Easily divisible by 3 and 2.
+$catbus-nav-width: 264px !default;
+$catbus-top-offset: 0 !default;
+
+// This is what you would normally use as a bottom margin on the navbar.
+$catbus-top-padding: 20px !default;
 
 .catbus {
-  overflow: hidden;
   position: relative;
-  z-index: 10;
+  overflow: hidden;
+  min-height: 100vh;
   width: 100%;
 }
 
-.catbus__nav {
-  @include transition-property(transform);
-  @include transition-duration(.25s);
-  position: absolute;
-  width: $catbus-nav-width;
-  right: 100%;
-  top: 0;
-  z-index: 100;
+.catbus__container {
+  width: 100%;
+  height: 100%;
+  @include transition-property(width, margin-left);
+  @include transition-duration($catbus-transition-duration);
 
-  .catbus-open & {
-    @include transform(translateX(100%));
+
+  @media #{$media-md} {
+    .catbus-left & {
+      @include display(flex);
+      width: unquote("calc(100% + #{$catbus-nav-width})");
+      margin-left: -$catbus-nav-width;
+    }
+
+    .catbus-right & {
+      @include display(flex);
+      width: unquote("calc(100% + #{$catbus-nav-width})");
+    }
+
+    .catbus-open & {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+
+.catbus__nav {
+  z-index: 30; // Above the Tail
+
+  .catbus-left &,
+  .catbus-right & {
+    width: $catbus-nav-width;
   }
 
-  & > button {
-    @include user-select(none);
+  @media #{$media-sm-max} {
+    position: absolute;
+    right: 100%;
+    top: $catbus-top-offset;
+
+    @include transition-property(transform);
+    @include transition-duration($catbus-transition-duration);
+
+    .catbus-open & {
+      @include transform(translateX(100%));
+    }
+  }
+
+  @media #{$media-md} {
+    position: relative;
+
+    .catbus-left & {
+      @include flex(none);
+    }
+
+    .catbus-right & {
+      @include flex(none);
+      @include order(1);
+    }
+  }
+
+
+  .catbus__button {
     position: absolute;
     width: 75%;
-    line-height: 36px;
-    padding: 0 1em;
-    text-transform: uppercase;
-    text-align: left;
-    margin: 0;
+    top: 0;
+    right: 0;
+    @include transform-origin(right top);
+    @include transform(rotateZ(-90deg));
 
-    @media (max-width: $screen-lg - 1) {
-      display: none;
-    }
-
-    .carrot {
-      @include transition-property(transform);
-      @include transition-duration(.25s);
-      float: right;
-      line-height: inherit;
-    }
-  }
-
-  .catbus--left & {
-    @media (min-width: $screen-md) {
-      right: 100%;
-      top: $catbus-top-gap / 2;
-
-      @media (min-width: $screen-md) {
-        .catbus-pinned & {
-          @include transform(translateX(100%));
-        }
+    @media #{$media-md} {
+      .catbus-right & {
+        top: auto;
+        bottom: 100%;
+        right: 100%;
+        @include transform-origin(right bottom);
       }
-    }
-
-    & > button {
-      top: 0;
-      right: 0;
-
-      @include transform-origin(right top);
-      @include transform(rotateZ(-90deg));
-
-      .carrot {
-        .catbus-open & {
-          @include transform(rotateZ(180deg));
-        }
-      }
-    }
-  }
-
-  .catbus--right & {
-    @media (min-width: $screen-md) {
-      left: 100%;
-      top: $catbus-top-gap / 2;
-
-      .catbus-open & {
-        @include transform(translateX(-100%));
-      }
-    }
-
-    & > button {
-      bottom: 100%;
-      right: 100%;
-
-      @include transform-origin(right bottom);
-      @include transform(rotateZ(-90deg));
-
-      .carrot {
-        @include transform(rotateZ(-180deg));
-
-        .catbus-open & {
-          @include transform(rotateZ(-360deg));
-        }
-      }
-    }
-  }
-
-  .catbus--top & {
-    @media (min-width: $screen-md) {
-      z-index: 0;
-      width: 100%;
-      left: 0;
-
-      height: $catbus-top-drop;
-      overflow: hidden;
-      @include transform(translateY(-42px));
-
-      .catbus-open & {
-        @include transform(translateY(0));
-      }
-    }
-
-    & > button {
-      display: none;
     }
   }
 }
 
 .catbus__section {
   position: relative;
-  z-index: 50;
-  padding-top: $catbus-top-gap / 2;
-  top: 0;
+  z-index: 10; // The Bottom
+  padding-top: $catbus-top-padding;
+  @include transition-duration($catbus-transition-duration);
+  @include transition-property(padding-left, padding-right, top);
 
-  .catbus--top & {
-    @include transition-property(transform, top);
-    @include transition-duration(.25s);
-
-    .catbus-open & {
-      @media (min-width: $screen-md) {
-        @include transform(translateY($catbus-top-drop));
-
-        @if $disable-firefox-transform {
-
-          // Firefox only CSS selector.  Disables TranslateY because Firefox
-          // can't use wmode=direct as a child of an element thats had a
-          // transform applied to it.
-          &, x:-moz-any-link, x:default {
-            @include transform(none);
-            top: $catbus-top-drop;
-          }
-        }
-      }
+  // Starting with medium screens we're shaking things up.
+  @media #{$media-md} {
+    .catbus-left &,
+    .catbus-right & {
+      @include flex(auto);
     }
   }
-
-  .catbus--left & {
-    @media (min-width: $screen-md) {
-      .catbus-pinned &,
-      .catbus-open & {
-        padding-left: $catbus-nav-width;
-      }
-    }
-  }
-
-  .catbus--right & {
-    @media (min-width: $screen-md) {
-      .catbus-open &,
-      .catbus-pinned & {
-        padding-right: $catbus-nav-width;
-      }
-    }
-  }
-}
-
-.catbus__header {
-  position: relative;
-  width: 100%;
-}
-
-.catbus__article {
-  position: relative;
-  padding-bottom: $catbus-top-gap / 2;
 }
 
 .catbus__button {
-  @include user-select(none);
 
-  @media (min-width: $screen-sm) {
-    width: $catbus-nav-width;
-  }
-
-  @media (min-width: $screen-lg) {
-    &.catbus--left,
-    &.catbus--right {
-      display: none;
-    }
-  }
-
-  .carrot {
+  .#{$catbus-caret-class} {
     @include transition-property(transform);
-    @include transition-duration(.25s);
-    line-height: inherit;
-
-    @media (max-width: $screen-sm - 1) {
-      display: none;
-    }
-
-    @media (min-width: $screen-sm) {
-      float: right;
-    }
+    @include transition-duration($catbus-transition-duration);
 
     .catbus-open & {
       @include transform(rotateZ(-180deg));
     }
   }
-}
 
-.catbus__footer {
-  position: relative;
-
-  .catbus--top & {
-    .catbus-open & {
-      margin-bottom: $catbus-top-drop;
-    }
-
-    .catbus-pinned & {
-      @media (min-width: $screen-md) {
-        margin-bottom: $catbus-top-drop;
-      }
-    }
+  // Hide the button in the catbus__nav when we're using the navbar button.
+  .catbus-top .catbus__nav & {
+    display: none;
   }
 
-  .catbus--left & {
-    .catbus-open & {
-      margin-left: -$catbus-nav-width;
-    }
-
-    .catbus-pinned & {
-      @media (min-width: $screen-md) {
-        margin-left: -$catbus-nav-width;
-      }
-    }
-  }
-
-  .catbus--right & {
-    .catbus-open & {
-      margin-right: -$catbus-nav-width;
-    }
-
-    .catbus-pinned & {
-      @media (min-width: $screen-md) {
-        margin-left: $catbus-nav-width;
-      }
-    }
+  &:active, &:focus {
+    outline: 0;
   }
 }
 
 .catbus__tail {
+  position: absolute;
+  z-index: 20; // Above the content, below the nav
+
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: 50;
+  content: "";
+  background: rgba(#000, 0.75);
   display: none;
-  position: absolute;
-  background: rgba(#000, 0.5);
 
-  @media (max-width: $screen-md - 1) {
+  // We we always want the tail when less than $screen-md
+  @media #{$media-sm-max} {
     .catbus-open & {
       display: block;
-    }
-  }
-
-  @media (max-width: $screen-lg -1) {
-    .catbus--top & {
-      .catbus-open & {
-        display: block;
-      }
     }
   }
 }

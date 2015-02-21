@@ -1,13 +1,10 @@
 // Bootstrap
-$icon-font-path: "bower_components/bootstrap/dist/fonts/";
-@import "bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/bootstrap.scss";
+$icon-font-path: "bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap.scss";
 
 // Catbus base
-@import "_build.scss";
+@import "build";
 
-// Catbus theme
-@import "_catbus-theme.scss";
-
-.wunderbar {
-  margin: 0;
+.navbar {
+  margin-bottom: 0;
 }
