@@ -2,9 +2,10 @@
 $icon-font-path: "bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap.scss";
 
-// Catbus base
-@import "build";
-
 .navbar {
   margin-bottom: 0;
 }
+
+// Catbus base
+@import "src/sass/build";
+

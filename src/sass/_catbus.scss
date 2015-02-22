@@ -32,6 +32,47 @@ $catbus-top-padding: 20px !default;
 
 $catbus-gutter: 5% !default;
 
+// This is also the minimum width of the .catbus__button so that they match.
+$catbus-tab-width: 171px !default;
+
+//
+// Colors
+//
+$catbus-theme: dark !default;
+
+$catbus-background: #333333;
+$catbus-background-dark: darken($catbus-background, 10);
+
+$catbus-tab-background: $catbus-background-dark;
+$catbus-tab-background-hover: lighten($catbus-tab-background, 4);
+$catbus-tab-background-active: $catbus-background;
+
+$catbus-link-color: #999999;
+$catbus-link-color-dim: darken($catbus-link-color, 7);
+$catbus-link-color-active: #ffffff;
+
+$catbus-tab-color: $catbus-link-color-active;
+
+$catbus-divider-color: lighten($catbus-background, 10);
+
+// $catbus-background-hover  : #262626;
+// $catbus-background-active : ;
+// $catbus-color             : #999999;
+// $catbus-color-dim         : #888888;
+// $catbus-color-active      : #ffffff;
+// $catbus-divider-color     : #4d4d4d;
+
+// @if $catbus-theme == light {
+//   $catbus-background        : invert($catbus-background);
+//   $catbus-background-hover  : invert($catbus-background-hover);
+//   $catbus-background-active : invert($catbus-background-active);
+//   $catbus-color             : invert($catbus-color);
+//   $catbus-color-dim         : invert($catbus-color-dim);
+//   $catbus-color-active      : invert($catbus-color-active);
+//   $catbus-divider-color     : invert($catbus-divider-color);
+// }
+
+
 .catbus {
   position: relative;
   overflow: hidden;
@@ -72,6 +113,7 @@ $catbus-gutter: 5% !default;
 .catbus__nav {
   z-index: 30; // Above the Tail
   width: $catbus-nav-width;
+  background: $catbus-background;
 
   @media #{$media-sm-max} {
     position: absolute;
@@ -101,25 +143,13 @@ $catbus-gutter: 5% !default;
     .catbus-top & {
       width: 100%;
       height: $catbus-nav-height;
+
+      $shadow: 0px 20px 20px -15px rgba(0, 0, 0, 0.75);
+      @include side-shadow($shadow, top);
     }
   }
 
   .catbus__button {
-    position: absolute;
-    width: 75%;
-    top: 0;
-    right: 0;
-    @include transform-origin(right top);
-    @include transform(rotateZ(-90deg));
-
-    @media #{$media-md} {
-      .catbus-right & {
-        top: auto;
-        bottom: 100%;
-        right: 100%;
-        @include transform-origin(right bottom);
-      }
-    }
   }
 }
 
@@ -147,8 +177,17 @@ $catbus-gutter: 5% !default;
 }
 
 .catbus__button {
+  min-width: $catbus-tab-width;
+  @include user-select(none);
+
+  .inner {
+    position: relative;
+    padding-right: 25px;
+  }
 
   .#{$catbus-caret-class} {
+    position: absolute;
+    right: 0;
     @include transition-property(transform);
     @include transition-duration($catbus-transition-duration);
 
@@ -165,9 +204,27 @@ $catbus-gutter: 5% !default;
     }
   }
 
-  // Hide the button in the catbus__nav when we're using the navbar button.
-  .catbus-top .catbus__nav & {
-    display: none;
+  .catbus__nav & {
+    position: absolute;
+    width: 75%;
+    top: 0;
+    right: 0;
+    @include transform-origin(right top);
+    @include transform(rotateZ(-90deg));
+
+    @media #{$media-md} {
+      .catbus-right & {
+        top: auto;
+        bottom: 100%;
+        right: 100%;
+        @include transform-origin(right bottom);
+      }
+    }
+
+    // Hide the button in the catbus__nav when we're using the navbar button.
+    .catbus-top & {
+      display: none;
+    }
   }
 
   &:active, &:focus {

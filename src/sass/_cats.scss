@@ -1,0 +1,148 @@
+.cats {
+  a {
+    @include self-link-states {
+      text-decoration: none;
+    }
+  }
+}
+
+
+.cats__container {
+
+
+  @media #{$media-md} {
+    .catbus-top & {
+      @include display(flex);
+    }
+  }
+}
+
+
+.cats__tabs {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  @include display(flex);
+
+  & > li {
+    @include flex(1 1 33%);
+  }
+
+  @media #{$media-md} {
+    .catbus-top & {
+      @include flex(none);
+      @include flex-direction(column);
+      width: $catbus-tab-width;
+
+      & > li {
+        @include flex(1 1 33%);
+        width: 100%;
+        line-height: $catbus-nav-height / 3;
+      }
+
+    }
+  }
+}
+
+// This one is a stupid name
+.cats__tab {
+  display: block;
+  text-align: center;
+  background: $catbus-tab-background;
+  color: $catbus-tab-color;
+
+  @media #{$media-md} {
+    text-align: left;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  &:hover {
+    color: $catbus-tab-color;
+    background: $catbus-tab-background-hover;
+  }
+
+  li.active > & {
+    color: $catbus-tab-color;
+    background: $catbus-tab-background-active;
+  }
+
+  //
+  // Selector abuse!
+  // https://grack.com/blog/2015/01/09/abusing-css3-selectors/
+  //
+  // Calculate the line-heights accordingly
+  // The first one of these is getting only 2 tabs.
+  li:nth-child(1):nth-last-child(2) &,
+  li:nth-child(2):nth-last-child(1) & {
+    line-height: $catbus-nav-height / 2;
+  }
+
+  // This one is when there are 3.
+  li:nth-child(1):nth-last-child(3) &,
+  li:nth-child(2):nth-last-child(2) &,
+  li:nth-child(3):nth-last-child(1) & {
+    line-height: $catbus-nav-height / 3;
+  }
+
+}
+
+.cats__content {
+
+  @media #{$media-md} {
+    .catbus-top & {
+      @include flex(auto);
+    }
+  }
+}
+
+
+.cats__pane {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.cats__links {
+  margin: 0;
+  list-style: none;
+
+  overflow: hidden;
+  height: 100%;
+
+  padding: 10px 20px;
+
+  @media #{$media-md} {
+    .catbus-top & {
+      @include display(flex);
+      @include flex-flow(column wrap);
+      height: $catbus-nav-height;
+
+      & > li {
+        width: unquote("calc(100% / 9)");
+      }
+    }
+  }
+}
+
+
+.cats__link {
+  display: block;
+  font-size: 14px;
+  color: $catbus-link-color;
+
+  &:hover,
+  &.selected,
+  &.active {
+    color: $catbus-link-color-active;
+  }
+
+  @media #{$media-md} {
+    .catbus-top & {
+      line-height: 22px;
+    }
+  }
+}

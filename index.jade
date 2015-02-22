@@ -2,53 +2,10 @@
 .navbar.navbar-inverse.navbar-static-top
   .container-fluid
     a.navbar-brand(js-catbus-button).catbus__button
-      | Catbus Button <small class="glyphicon glyphicon-chevron-down carrot"></small>
+      .inner
+        | Catbus <small class="glyphicon glyphicon-chevron-down carrot"></small>
 
     .pull-right
       a.navbar-brand Assumed Navbar
 
-//- catbus
-.catbus
-  .catbus__container
-    nav.catbus__nav(js-catbus-nav)
-      button.catbus__button.btn.btn-default(js-catbus-button) Catbus Button <small class="glyphicon glyphicon-chevron-down carrot"></small>
-
-      include _cats.jade
-
-
-    section.catbus__section
-      header.catbus__header
-        .well
-          .btn.btn-danger.pull-right Delete Me
-          | This is some sort of optional space where we can put things that we want.
-          ul
-            li Notes
-            li Banners
-            li Upsells...
-
-
-      article.catbus__article
-        header
-          h4 Catbus Title
-        .well.demo
-          .pull-right
-            form#js-catbus-config.navbar-form.form-inline.pull-left
-              | Catbus Config: &nbsp;
-              .btn-group(data-toggle="buttons")
-                label.btn.btn-default
-                  input(type="radio" name="catbus-config" value="left")
-                  | Left
-                label.btn.btn-default.active
-                  input(type="radio" name="catbus-config" checked value="top")
-                  | Top
-                label.btn.btn-default
-                  input(type="radio" name="catbus-config" value="right")
-                  | Right
-
-          | Catbus Body.  Search results go here.
-
-      footer.catbus__footer
-        .well.demo
-          p Footer
-
-    .catbus__tail(js-catbus-tail)
+include src/jade/_catbus.jade

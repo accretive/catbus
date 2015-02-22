@@ -1,0 +1,24 @@
+.cats
+  .cats__container
+    ul.cats__tabs
+      li.active: a.cats__tab(href="#js-one"   data-toggle="tab") Tab One
+      li: a.cats__tab(href="#js-two"   data-toggle="tab") Tab Two
+      li: a.cats__tab(href="#js-three" data-toggle="tab") Tab Three
+
+    .cats__content
+      each group in cats
+        - var active = group.title == "one" ? "active" : ""
+        .cats__pane(id="js-#{group.title}" class="#{active}")
+          ul.cats__links
+            each cat, i in group.links
+              - var selected = i == 0 ? "selected" : ""
+              li: a.cats__link(href="#" class="#{selected}") #{cat}
+
+      //- #js-one.tab-pane.active
+      //-   ul.cats__links
+      //-     each cat in cats.one
+      //-       li: a.cats__link(href="#") #{cat}
+
+      //- #js-two.tab-pane
+
+      //- #js-three.tab-pane
