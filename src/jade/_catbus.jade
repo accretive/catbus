@@ -2,7 +2,10 @@
 .catbus
   .catbus__container
     nav.catbus__nav(js-catbus-nav)
-      button.catbus__button.btn.btn-default(js-catbus-button) Catbus Button <small class="glyphicon glyphicon-chevron-down carrot"></small>
+      button.catbus__button.btn.btn-default(js-catbus-button)
+        .inner
+          | Catbus Button
+          i.glyphicon.glyphicon-chevron-down
 
       include _cats.jade
 

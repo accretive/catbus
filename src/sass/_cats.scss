@@ -20,9 +20,9 @@
 
 .cats__tabs {
   margin: 0;
-  padding: 0;
+  padding: 1em 0 0;
   width: 100%;
-
+  background: $catbus-background-dark;
   @include display(flex);
 
   & > li {
@@ -34,6 +34,7 @@
       @include flex(none);
       @include flex-direction(column);
       width: $catbus-tab-width;
+      padding: 0;
 
       & > li {
         @include flex(1 1 33%);
@@ -47,16 +48,12 @@
 
 // This one is a stupid name
 .cats__tab {
+  @include ellipsis;
   display: block;
   text-align: center;
   background: $catbus-tab-background;
   color: $catbus-tab-color;
-
-  @media #{$media-md} {
-    text-align: left;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
+  border-bottom: 1px solid $catbus-divider-color;
 
   &:hover {
     color: $catbus-tab-color;
@@ -66,7 +63,19 @@
   li.active > & {
     color: $catbus-tab-color;
     background: $catbus-tab-background-active;
+    border-color: $catbus-tab-background-active;
   }
+
+  @media #{$media-md} {
+    text-align: left;
+    padding-left: $catbus-h-padding;
+    padding-right: $catbus-h-padding;
+
+    .catbus-top & {
+      border-bottom: 0;
+    }
+  }
+
 
   //
   // Selector abuse!
@@ -108,18 +117,18 @@
 
 .cats__links {
   margin: 0;
+  padding: 0;
   list-style: none;
 
   overflow: hidden;
   height: 100%;
-
-  padding: 10px 20px;
 
   @media #{$media-md} {
     .catbus-top & {
       @include display(flex);
       @include flex-flow(column wrap);
       height: $catbus-nav-height;
+      padding: 10px 20px;
 
       & > li {
         width: unquote("calc(100% / 9)");
@@ -134,6 +143,10 @@
   font-size: 14px;
   color: $catbus-link-color;
 
+  line-height: $catbus-links-height;
+  border-bottom: 1px solid $catbus-divider-color;
+  padding: 0 $catbus-h-padding;
+
   &:hover,
   &.selected,
   &.active {
@@ -142,7 +155,9 @@
 
   @media #{$media-md} {
     .catbus-top & {
-      line-height: 22px;
+      line-height: $catbus-links-height-top;
+      border: 0;
+      padding: 0;
     }
   }
 }

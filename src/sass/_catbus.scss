@@ -24,16 +24,19 @@ $catbus-nav-width: 264px !default;
 
 // Again 3 and 2, with the default (3) tabs being 36px each.
 $catbus-nav-height: 108px !default;
-
 $catbus-nav-offset: 0 !default;
 
 // This is what you would normally use as a bottom margin on the navbar.
 $catbus-top-padding: 20px !default;
+$catbus-h-padding: 15px !default;
 
 $catbus-gutter: 5% !default;
 
 // This is also the minimum width of the .catbus__button so that they match.
 $catbus-tab-width: 171px !default;
+
+$catbus-links-height: 36px !default;
+$catbus-links-height-top: 22px !default;
 
 //
 // Colors
@@ -179,7 +182,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
 .catbus__button {
   min-width: $catbus-tab-width;
   @include user-select(none);
-
+  text-align: left;
   .inner {
     position: relative;
     padding-right: 25px;
@@ -188,11 +191,16 @@ $catbus-divider-color: lighten($catbus-background, 10);
   .#{$catbus-caret-class} {
     position: absolute;
     right: 0;
+    top: 3px;
     @include transition-property(transform);
     @include transition-duration($catbus-transition-duration);
 
     .catbus-open & {
       @include transform(rotateZ(-180deg));
+    }
+
+    .catbus-top & {
+      top: 0;
     }
   }
 
