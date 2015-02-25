@@ -139,6 +139,7 @@
 
 
 .cats__link {
+  position: relative;
   display: block;
   font-size: 14px;
   color: $catbus-link-color;
@@ -153,11 +154,54 @@
     color: $catbus-link-color-active;
   }
 
+  // If you want to use your own iconography, opt out of this stuff.
+  @if $catbus-use-css-link-arrows {
+
+    // This is the bottom (z-ordering) half of the chevron.
+    &::before {
+      @extend %catbus-chevron;
+      right: 1em;
+      border-color: transparent transparent transparent $catbus-link-color-dim;
+    }
+
+    // This is a mask on top of the above arrow, that is the same color
+    // as the background, so it looks like a chevron instead of an arrow.
+    &::after {
+      @extend %catbus-chevron;
+      right: 1em + ($catbus-link-arrow-size / 2.5);
+      border-color: transparent transparent transparent $catbus-background;
+    }
+  }
+
   @media #{$media-md} {
     .catbus-top & {
       line-height: $catbus-links-height-top;
       border: 0;
       padding: 0;
+
+      &::before,
+      &::after {
+        display: none;
+      }
     }
   }
+}
+
+// CSS Triangles!
+// http://apps.eky.hk/css-triangle-generator/
+//
+// @extends show up in the code at the location of the %placeholder.  Its
+// OK for the placeholder to be *after* the code that is calling it.
+//
+// .cats__link::before, .cats__link::after
+%catbus-chevron {
+  position: absolute;
+  top: 50%;
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: $catbus-link-arrow-size;
+  border-right-width: 0;
+  @include transform(translateY(-50%));
 }
