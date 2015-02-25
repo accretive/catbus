@@ -2,14 +2,8 @@
 $icon-font-path: "bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap.scss";
 
-.navbar {
-  margin-bottom: 0;
-}
-
-.invisible {
-  visibility: hidden;
-}
-
 // Catbus base
 @import "src/sass/build";
 
+// Demo stuff
+@import "src/sass/demo";

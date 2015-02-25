@@ -1,29 +1,34 @@
-#
-# @author Daryl Roberts
-# @license MIT
-#
+# #
+# # @author Daryl Roberts
+# # @license MIT
+# #
 
-# This is a swanky AMD wrapper that I first saw used in jquery.cookie
-# here: https://github.com/carhartl/jquery-cookie
-((factory) ->
+# # This is a swanky AMD wrapper that I first saw used in jquery.cookie
+# # here: https://github.com/carhartl/jquery-cookie
+# ((factory) ->
 
-  # Require.js
-  if typeof define is 'function' and define.amd
-    define ['jquery'], factory
+#   # Require.js
+#   if typeof define is 'function' and define.amd
+#     define ['jquery'], factory
 
-  # CommonJs (Node)
-  else if typeof exports is 'object'
-    factory require 'jquery'
+#   # CommonJs (Node)
+#   else if typeof exports is 'object'
+#     factory require 'jquery'
 
-  # Browser
-  else factory jQuery
+#   # Browser
+#   else factory jQuery
 
-) ($) -> $ ->
+# ) ($) -> $ ->
 
+
+define ['jquery'], ($) ->
+
+  # Cached jquery references
   $body = $('body')
   $catbusTail = $('[js-catbus-tail]')
   $clickables = $('[js-catbus-button], [js-catbus-tail]')
 
+  # Local storage keys
   LS_CATBUS_STATUS = 'catbus-status'
   LS_STORED_PINNED = 'pinned'
   LS_STORED_CLOSED = 'closed'

@@ -9,6 +9,7 @@ requirejs.config
 requirejs ['jquery', 'bootstrap', 'catbus'], ($) -> $ ->
 
   $body = $('body')
+  $catbus = $('[js-catbus]')
   $buttons = $('[js-demo-buttons]')
 
   config = 'top'
@@ -33,8 +34,18 @@ requirejs ['jquery', 'bootstrap', 'catbus'], ($) -> $ ->
       .removeClass "catbus-#{oldPlace}"
       .addClass "catbus-#{newPlace}"
 
+  # The Sneakiness!
+  #
+  # This disables all the catbus animations while you're hovering over the
+  # buttons that pick which side the catbus is on.
+  disableAnim = (bool) ->
+    $catbus.toggleClass 'disable-anim', bool
+
   init = ->
     changePlaces config
-    $buttons.on 'change', changePlaces
+    $buttons
+      .on 'change', changePlaces
+      .on 'mouseenter', -> disableAnim(true)
+      .on 'mouseleave', -> disableAnim(false)
 
   do init

@@ -1,0 +1,11 @@
+.navbar {
+  margin-bottom: 0;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.disable-anim * {
+  @include transition-duration(0 !important);
+}
