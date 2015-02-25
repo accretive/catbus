@@ -1,13 +1,25 @@
 //- catbus
 .catbus(js-catbus)
+
+  //- content container.  this is what moves around to slide the categories
+  //- on and off the page.
   .catbus__container
+
+    //- this is the off canvas menu
     nav.catbus__nav(js-catbus-nav)
+
+      //- The button on the side of the cats.
       button.catbus__button.btn.btn-default(js-catbus-button) Catbus Button
 
+      //- The nav content.
       include _cats.jade
 
-
+    //- the main content of the page.
     section.catbus__section
+
+      //- The rest of the page.
       include _demo.jade
 
+    //- the catbus tail shows up as an overlay for smaller devices when the
+    //- catbus menu is visible. pulling the tail makes the cat run away.
     img.catbus__tail(js-catbus-tail src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7")

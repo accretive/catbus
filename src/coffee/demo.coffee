@@ -34,6 +34,16 @@ requirejs ['jquery', 'bootstrap', 'catbus'], ($) -> $ ->
       .removeClass "catbus-#{oldPlace}"
       .addClass "catbus-#{newPlace}"
 
+  changeHeader = (e) ->
+    type = $(e.target).val()
+    opposite = if type is 'open' then 'standard' else 'open'
+
+    incoming = "[js-navbar-#{type}]"
+    outgoing = "[js-navbar-#{opposite}]"
+
+    $(outgoing).addClass 'hide'
+    $(incoming).removeClass 'hide'
+
   # The Sneakiness!
   #
   # This disables all the catbus animations while you're hovering over the
@@ -47,5 +57,7 @@ requirejs ['jquery', 'bootstrap', 'catbus'], ($) -> $ ->
       .on 'change', changePlaces
       .on 'mouseenter', -> disableAnim(true)
       .on 'mouseleave', -> disableAnim(false)
+
+    $('#js-navbar-config').on 'change', changeHeader
 
   do init

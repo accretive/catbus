@@ -1,13 +1,4 @@
 .cats {
-  background: $catbus-background;
-
-  @media #{$media-md} {
-    .catbus-top & {
-      $shadow: 0px 20px 20px -15px rgba(0, 0, 0, 0.75);
-      @include side-shadow($shadow, top);
-    }
-  }
-
   a {
     @include self-link-states {
       text-decoration: none;
@@ -17,11 +8,14 @@
 
 
 .cats__container {
-
+  background: $catbus-background;
 
   @media #{$media-md} {
     .catbus-top & {
       @include display(flex);
+
+      $shadow: 0px 20px 20px -15px rgba(0, 0, 0, 0.75);
+      @include side-shadow($shadow, top);
     }
   }
 }

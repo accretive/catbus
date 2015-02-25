@@ -1,10 +1,18 @@
-//- wunderbar
-.navbar.navbar-inverse.navbar-static-top
+.navbar.navbar-inverse.navbar-static-top(js-navbar-standard)
   .container-fluid
     .pull-left
       a.btn.navbar-btn.btn-default.catbus__button(js-catbus-button) Catbus Button
 
     .pull-right
-      a.navbar-brand Assumed Navbar
+      a.navbar-brand Standard Navbar
+
+
+.navbar.navbar-open(js-navbar-open).hide
+  .container-fluid
+    .pull-left
+      a.btn.navbar-btn.btn-default.catbus__button(js-catbus-button) Catbus Button
+
+    .pull-right
+      a.navbar-brand Open Navbar
 
 include src/jade/_catbus.jade

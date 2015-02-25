@@ -159,6 +159,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
     }
 
     .catbus-top & {
+      @include box-sizing(border-box);
       width: 100%;
       height: $catbus-nav-height;
       border-right: 0;
@@ -237,6 +238,14 @@ $catbus-divider-color: lighten($catbus-background, 10);
         bottom: 100%;
         right: 100%;
         @include transform-origin(right bottom);
+
+        &::after {
+          @include transform(translateY(-50%) rotateZ(-180deg));
+        }
+      }
+
+      .catbus-open.catbus-right &::after {
+        @include transform(translateY(-50%));
       }
     }
 
@@ -246,8 +255,8 @@ $catbus-divider-color: lighten($catbus-background, 10);
     }
   }
 
-  .catbus-left &,
-  .catbus-right & {
+  .catbus-left & {
+    @include border-top-radius(0);
 
     // This hides the button in the bootstrap navbar.  Whatever custom
     // buttons are used need to be hidden some other way.
@@ -255,6 +264,18 @@ $catbus-divider-color: lighten($catbus-background, 10);
       display: none;
     }
   }
+
+  .catbus-right & {
+    @include border-bottom-radius(0);
+
+    // This hides the button in the bootstrap navbar.  Whatever custom
+    // buttons are used need to be hidden some other way.
+    &.navbar-btn {
+      display: none;
+    }
+  }
+
+
 
   &:active, &:focus {
     outline: 0;
