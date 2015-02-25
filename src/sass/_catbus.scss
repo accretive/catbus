@@ -15,8 +15,9 @@ $media-md-max: "only screen and (max-width: #{$screen-lg - 1})";
 $media-lg: "only screen and (min-width: #{$screen-lg})";
 
 
-$catbus-caret-class: glyphicon !default;
+$catbus-caret-class: caret !default;
 $catbus-transition-duration: .25s !default;
+$catbus-use-css-link-arrows: true !default;
 
 // This is about 81% of the width of the iPhone 4 screen.
 // Easily divisible by 3 and 2.
@@ -152,9 +153,6 @@ $catbus-divider-color: lighten($catbus-background, 10);
       @include side-shadow($shadow, top);
     }
   }
-
-  .catbus__button {
-  }
 }
 
 .catbus__section {
@@ -184,24 +182,25 @@ $catbus-divider-color: lighten($catbus-background, 10);
   min-width: $catbus-tab-width;
   @include user-select(none);
   text-align: left;
-  .inner {
-    position: relative;
-    padding-right: 25px;
-  }
+  position: relative;
 
-  .#{$catbus-caret-class} {
+  &::after {
     position: absolute;
-    right: 0;
-    top: 3px;
-    @include transition-property(transform);
+    top: 50%;
+    right: 1em;
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: .3em solid;
+    border-left: .3em solid transparent;
+    border-right: .3em solid transparent;
     @include transition-duration($catbus-transition-duration);
+    @include transition-property(transform);
+
+    @include transform(translateY(-50%));
 
     .catbus-open & {
-      @include transform(rotateZ(-180deg));
-    }
-
-    .catbus-top & {
-      top: 0;
+      @include transform(translateY(-50%) rotateZ(-180deg));
     }
   }
 
@@ -232,6 +231,16 @@ $catbus-divider-color: lighten($catbus-background, 10);
 
     // Hide the button in the catbus__nav when we're using the navbar button.
     .catbus-top & {
+      display: none;
+    }
+  }
+
+  .catbus-left &,
+  .catbus-right & {
+
+    // This hides the button in the bootstrap navbar.  Whatever custom
+    // buttons are used need to be hidden some other way.
+    &.navbar-btn {
       display: none;
     }
   }

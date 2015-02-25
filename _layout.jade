@@ -1,12 +1,10 @@
 doctype html
 head
   link(rel="stylesheet" href="/main.css")
-  meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,\
-    user-scalable=no, minimal-ui")
+  meta(name="viewport" content="width=device-width, initial-scale=1.0, \
+    maximum-scale=1.0, user-scalable=no, minimal-ui")
 
-  script(src="/bower_components/jquery/dist/jquery.min.js")
-  script(src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js")
-  script(src="/app.js")
+  script(src="/bower_components/requirejs/require.js" data-main="src/coffee/demo")
 
-body.catbus-open.catbus-top
+body.catbus-left
   != yield

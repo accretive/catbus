@@ -6,6 +6,10 @@ $icon-font-path: "bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   margin-bottom: 0;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 // Catbus base
 @import "src/sass/build";
 
