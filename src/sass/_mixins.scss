@@ -17,8 +17,8 @@
 //
 // @author Daryl Roberts
 // @license MIT
+// @url https://gist.github.com/sorahn/7915cae6c820e351158f
 //
-
 @mixin side-shadow($shadow, $side, $base-size: 50px) {
   // If you need to make shadows larger than 50px, you can
   // override the base size.
@@ -63,5 +63,37 @@
       right: -$base-size;
       height: $base-size;
     }
+  }
+}
+
+
+@mixin caret-triangle-base($direction, $size) {
+
+  @if $direction == top {
+    border-top: 0;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid currentColor;
+  }
+
+  @else if $direction == right {
+    border-top: $size solid transparent;
+    border-left: $size solid currentColor;
+    border-right: 0;
+    border-bottom: $size solid transparent;
+  }
+
+  @else if $direction == bottom {
+    border-top: $size solid currentColor;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: 0;
+  }
+
+  @else { // $direction == left
+    border-top: $size solid transparent;
+    border-left: 0;
+    border-right: $size solid currentColor;
+    border-bottom: $size solid transparent;
   }
 }

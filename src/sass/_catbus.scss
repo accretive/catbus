@@ -16,6 +16,7 @@ $media-lg: "only screen and (min-width: #{$screen-lg})";
 
 
 $catbus-caret-class: caret !default;
+$catbus-caret-size: .3em !default;
 $catbus-transition-duration: .25s !default;
 $catbus-use-css-link-arrows: true !default;
 
@@ -203,25 +204,23 @@ $catbus-divider-color: lighten($catbus-background, 10);
     content: "";
     width: 0;
     height: 0;
-    border-top: .3em solid;
-    border-left: .3em solid transparent;
-    border-right: .3em solid transparent;
     @include transition-duration($catbus-transition-duration);
     @include transition-property(transform);
+    @include caret-triangle-base(right, $catbus-caret-size);
 
     @include transform(translateY(-50%));
 
     .catbus-open & {
       @include transform(translateY(-50%) rotateZ(-180deg));
     }
+
+    @media #{$media-md} {
+      @include caret-triangle-base(bottom, $catbus-caret-size);
+    }
   }
 
-  // Hide the button on smaller screens
-  @media #{$media-sm-max} {
-    .catbus-left .catbus__nav &,
-    .catbus-right .catbus__nav & {
-      display: none;
-    }
+  &:active, &:focus {
+    outline: 0;
   }
 
   .catbus__nav & {
@@ -232,6 +231,12 @@ $catbus-divider-color: lighten($catbus-background, 10);
     @include transform-origin(right top);
     @include transform(rotateZ(-90deg));
 
+
+    // Hide the button on smaller screens
+    @media #{$media-sm-max} {
+      display: none;
+    }
+
     @media #{$media-md} {
       .catbus-right & {
         top: auto;
@@ -240,45 +245,42 @@ $catbus-divider-color: lighten($catbus-background, 10);
         @include transform-origin(right bottom);
 
         &::after {
-          @include transform(translateY(-50%) rotateZ(-180deg));
+          border-top: 0;
+          border-bottom: .3em solid;
         }
       }
 
-      .catbus-open.catbus-right &::after {
-        @include transform(translateY(-50%));
+      // Hide the button in the catbus__nav when we're using the navbar button.
+      .catbus-top & {
+        display: none;
       }
-    }
-
-    // Hide the button in the catbus__nav when we're using the navbar button.
-    .catbus-top & {
-      display: none;
     }
   }
 
   .catbus-left & {
-    @include border-top-radius(0);
 
-    // This hides the button in the bootstrap navbar.  Whatever custom
-    // buttons are used need to be hidden some other way.
-    &.navbar-btn {
-      display: none;
+    @media #{$media-md} {
+      @include border-top-radius(0);
+
+      // This hides the button in the bootstrap navbar.  Whatever custom
+      // buttons are used need to be hidden some other way.
+      &.navbar-btn {
+        display: none;
+      }
     }
   }
 
   .catbus-right & {
-    @include border-bottom-radius(0);
 
-    // This hides the button in the bootstrap navbar.  Whatever custom
-    // buttons are used need to be hidden some other way.
-    &.navbar-btn {
-      display: none;
+    @media #{$media-md} {
+      @include border-bottom-radius(0);
+
+      // This hides the button in the bootstrap navbar.  Whatever custom
+      // buttons are used need to be hidden some other way.
+      &.navbar-btn {
+        display: none;
+      }
     }
-  }
-
-
-
-  &:active, &:focus {
-    outline: 0;
   }
 }
 

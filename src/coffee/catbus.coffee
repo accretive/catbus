@@ -1,32 +1,17 @@
-# #
-# # @author Daryl Roberts
-# # @license MIT
-# #
+#
+# @author Daryl Roberts
+# @license MIT
+#
 
-# # This is a swanky AMD wrapper that I first saw used in jquery.cookie
-# # here: https://github.com/carhartl/jquery-cookie
-# ((factory) ->
-
-#   # Require.js
-#   if typeof define is 'function' and define.amd
-#     define ['jquery'], factory
-
-#   # CommonJs (Node)
-#   else if typeof exports is 'object'
-#     factory require 'jquery'
-
-#   # Browser
-#   else factory jQuery
-
-# ) ($) -> $ ->
-
-
-define ['jquery'], ($) ->
+# This silly line is the require line and the jQuery function start
+define ['jquery'], ($) -> $ ->
 
   # Cached jquery references
   $body = $('body')
+
+  $dismissables = $('[js-catbus-dismiss]')
   $catbusTail = $('[js-catbus-tail]')
-  $clickables = $('[js-catbus-button], [js-catbus-tail]')
+  $clickables = $catbusTail.add('[js-catbus-button]')
 
   # Local storage keys
   LS_CATBUS_STATUS = 'catbus-status'
@@ -42,23 +27,35 @@ define ['jquery'], ($) ->
     pinned = false
     pinned = true if status is LS_STORED_PINNED
 
-    do toggleCatbus if pinned isnt catbusOpen
+    return pinned
 
-  toggleLocalStorage = (open) ->
+  setLocalStorate = (open) ->
     store = if open then LS_STORED_PINNED else LS_STORED_CLOSED
     localStorage.setItem LS_CATBUS_STATUS, store
 
-  toggleCatbus = ->
-    catbusOpen = !catbusOpen
+
+  openCatbus = -> toggleCatbus true
+  closeCatbus = -> toggleCatbus false
+
+  toggleCatbus = (force) ->
+    if typeof(force) isnt "boolean"
+      force = null
+
+    catbusOpen = force or !catbusOpen
     $body.toggleClass 'catbus-open', catbusOpen
-    toggleLocalStorage catbusOpen
+    setLocalStorate catbusOpen
 
   toggleTail = ->
     $catbusTail.toggleClass 'hide', !catbusOpen
 
+  closeForDismissableClick = ->
+    if $catbusTail.is(':visible') and catbusOpen
+      closeCatbus()
+
   init = ->
     $clickables.on 'click', toggleCatbus
     $catbusTail.on transitionEnd, toggleTail
-    do catbusPinned
 
-  do init
+    if catbusPinned() then openCatbus()
+
+  init()
