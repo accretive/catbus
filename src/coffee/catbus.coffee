@@ -4,58 +4,61 @@
 #
 
 # This silly line is the require line and the jQuery function start
-define ['jquery'], ($) -> $ ->
+define ['jquery'], ($) ->
+  $(document).ready ->
 
-  # Cached jquery references
-  $body = $('body')
+    # Cached jquery references
+    $body = $('body')
 
-  $dismissables = $('[js-catbus-dismiss]')
-  $catbusTail = $('[js-catbus-tail]')
-  $clickables = $catbusTail.add('[js-catbus-button]')
+    # @todo
+    # $dismissables = $('[js-catbus-dismiss]')
 
-  # Local storage keys
-  LS_CATBUS_STATUS = 'catbus-status'
-  LS_STORED_PINNED = 'pinned'
-  LS_STORED_CLOSED = 'closed'
+    $catbusTail = $('[js-catbus-tail]')
+    $clickables = $catbusTail.add('[js-catbus-button]')
 
-  catbusOpen = $body.hasClass 'catbus-open'
-  transitionEnd = 'webkitTransitionEnd otransitionend msTransitionEnd transitionend'
+    # Local storage keys
+    LS_CATBUS_STATUS = 'catbus-status'
+    LS_STORED_PINNED = 'pinned'
+    LS_STORED_CLOSED = 'closed'
 
-  catbusPinned = ->
-    status = localStorage.getItem LS_CATBUS_STATUS
+    catbusOpen = $body.hasClass 'catbus-open'
+    transitionEnd = 'webkitTransitionEnd otransitionend msTransitionEnd transitionend'
 
-    pinned = false
-    pinned = true if status is LS_STORED_PINNED
+    catbusPinned = ->
+      status = localStorage.getItem LS_CATBUS_STATUS
 
-    return pinned
+      pinned = false
+      pinned = true if status is LS_STORED_PINNED
 
-  setLocalStorate = (open) ->
-    store = if open then LS_STORED_PINNED else LS_STORED_CLOSED
-    localStorage.setItem LS_CATBUS_STATUS, store
+      return pinned
+
+    setLocalStorate = (open) ->
+      store = if open then LS_STORED_PINNED else LS_STORED_CLOSED
+      localStorage.setItem LS_CATBUS_STATUS, store
 
 
-  openCatbus = -> toggleCatbus true
-  closeCatbus = -> toggleCatbus false
+    openCatbus = -> toggleCatbus true
+    closeCatbus = -> toggleCatbus false
 
-  toggleCatbus = (force) ->
-    if typeof(force) isnt "boolean"
-      force = null
+    toggleCatbus = (force) ->
+      if typeof(force) isnt "boolean"
+        force = null
 
-    catbusOpen = force or !catbusOpen
-    $body.toggleClass 'catbus-open', catbusOpen
-    setLocalStorate catbusOpen
+      catbusOpen = force or !catbusOpen
+      $body.toggleClass 'catbus-open', catbusOpen
+      setLocalStorate catbusOpen
 
-  toggleTail = ->
-    $catbusTail.toggleClass 'hide', !catbusOpen
+    toggleTail = ->
+      $catbusTail.toggleClass 'hide', !catbusOpen
 
-  closeForDismissableClick = ->
-    if $catbusTail.is(':visible') and catbusOpen
-      closeCatbus()
+    closeForDismissableClick = ->
+      if $catbusTail.is(':visible') and catbusOpen
+        closeCatbus()
 
-  init = ->
-    $clickables.on 'click', toggleCatbus
-    $catbusTail.on transitionEnd, toggleTail
+    init = ->
+      $clickables.on 'click', toggleCatbus
+      $catbusTail.on transitionEnd, toggleTail
 
-    if catbusPinned() then openCatbus()
+      if catbusPinned() then openCatbus()
 
-  init()
+    init()
