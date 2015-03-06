@@ -4,7 +4,8 @@
   "description": "An off canvas side menu manager.",
   "main": "public/javascript/catbus.coffee",
   "dependencies": {
-    "harp": "^0.15.2"
+    "harp": "^0.15.2",
+    "terraform": "sorahn/terraform#uncompress"
   },
   "devDependencies": {},
   "scripts": {

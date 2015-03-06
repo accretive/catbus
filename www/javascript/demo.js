@@ -1,1 +1,65 @@
-requirejs.config({shim:{bootstrap:{deps:["jquery"]}},paths:{jquery:"../components/jquery/dist/jquery",bootstrap:"../components/bootstrap-sass/assets/javascripts/bootstrap"}});requirejs(["jquery","bootstrap","catbus"],function(t){return t(function(){var s,e,r,n,a,o,u,i;s=t("body");r=t("[js-catbus]");e=t("[js-demo-buttons]");o="top";if(s.hasClass("catbus-left")){o="left"}if(s.hasClass("catbus-right")){o="right"}a=function(r){var n,a,u;u=o;if(typeof r==="string"){a=r;e.find('[for="'+a+'"]').trigger("click")}else{n=t(r.target);a=n.val()}o=a;return s.removeClass("catbus-"+u).addClass("catbus-"+a)};n=function(s){var e,r,n,a;a=t(s.target).val();r=a==="open"?"standard":"open";e="[js-navbar-"+a+"]";n="[js-navbar-"+r+"]";t(n).addClass("hide");return t(e).removeClass("hide")};i=function(t){return r.toggleClass("disable-anim",!t)};u=function(){a(o);e.on("change",a).on("mouseenter",function(){return i(false)}).on("mouseleave",function(){return i(true)});t("#js-navbar-config").on("change",n);return setTimeout(function(){return i(true)},300)};return u()})});
+requirejs.config({
+  shim: {
+    'bootstrap': {
+      'deps': ['jquery']
+    }
+  },
+  paths: {
+    'jquery': '../components/jquery/dist/jquery',
+    'bootstrap': '../components/bootstrap-sass/assets/javascripts/bootstrap'
+  }
+});
+
+requirejs(['jquery', 'bootstrap', 'catbus'], function($) {
+  return $(function() {
+    var $body, $buttons, $catbus, changeHeader, changePlaces, config, init, toggleAnim;
+    $body = $('body');
+    $catbus = $('[js-catbus]');
+    $buttons = $('[js-demo-buttons]');
+    config = 'top';
+    if ($body.hasClass('catbus-left')) {
+      config = 'left';
+    }
+    if ($body.hasClass('catbus-right')) {
+      config = 'right';
+    }
+    changePlaces = function(e) {
+      var $input, newPlace, oldPlace;
+      oldPlace = config;
+      if (typeof e === 'string') {
+        newPlace = e;
+        $buttons.find("[for=\"" + newPlace + "\"]").trigger('click');
+      } else {
+        $input = $(e.target);
+        newPlace = $input.val();
+      }
+      config = newPlace;
+      return $body.removeClass("catbus-" + oldPlace).addClass("catbus-" + newPlace);
+    };
+    changeHeader = function(e) {
+      var incoming, opposite, outgoing, type;
+      type = $(e.target).val();
+      opposite = type === 'open' ? 'standard' : 'open';
+      incoming = "[js-navbar-" + type + "]";
+      outgoing = "[js-navbar-" + opposite + "]";
+      $(outgoing).addClass('hide');
+      return $(incoming).removeClass('hide');
+    };
+    toggleAnim = function(bool) {
+      return $catbus.toggleClass('disable-anim', !bool);
+    };
+    init = function() {
+      changePlaces(config);
+      $buttons.on('change', changePlaces).on('mouseenter', function() {
+        return toggleAnim(false);
+      }).on('mouseleave', function() {
+        return toggleAnim(true);
+      });
+      $('#js-navbar-config').on('change', changeHeader);
+      return setTimeout((function() {
+        return toggleAnim(true);
+      }), 300);
+    };
+    return init();
+  });
+});

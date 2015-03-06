@@ -1,1 +1,104 @@
-define(["jquery"],function(t){return t(document).ready(function(){var n,e,a,s,u,o,r,i,c,l,f,b,d,g,p;n=t("body");e=t("[js-catbus]");a=t("[js-catbus-tail]");s=a.add("[js-catbus-button]");u="catbus-status";r="pinned";o="closed";i=n.hasClass("catbus-open");c=function(){var t,n;n=localStorage.getItem(u);t=false;if(n===r){t=true}return t};d=function(t){var n;n=t?r:o;return localStorage.setItem(u,n)};g=function(t){var a,s;a=false;if(typeof t!=="boolean"){t=null;a=!i}if(t===false||t){a=t}n.toggleClass("catbus-open",a);d(a);i=a;s="closed";if(a){s="open"}return e.trigger(s+".atg.catbus")};b=function(){return g(true)};l=function(){return g(false)};p=function(){return a.toggleClass("hide",!i)};f=function(){var t;t="webkitTransitionEnd otransitionend msTransitionEnd transitionend";s.on("click",g);a.on(t,p);if(c()){b()}else{l()}};f();return{openCatbus:b,closeCatbus:l,catbusStatus:function(){return i}}})});
+define(['jquery'], function($) {
+  return $(document).ready(function() {
+    var $body, $catbus, $catbusTail, $clickables, LS_CATBUS_STATUS, LS_STORED_CLOSED, LS_STORED_PINNED, catbusOpen, catbusPinned, closeCatbus, init, openCatbus, setLocalStorage, toggleCatbus, toggleTail;
+    $body = $('body');
+    $catbus = $('[js-catbus]');
+    $catbusTail = $('[js-catbus-tail]');
+    $clickables = $catbusTail.add('[js-catbus-button]');
+    LS_CATBUS_STATUS = 'catbus-status';
+    LS_STORED_PINNED = 'pinned';
+    LS_STORED_CLOSED = 'closed';
+    catbusOpen = $body.hasClass('catbus-open');
+
+    /**
+     * Tells us if local storage says the catbus is pinned open or not.
+     */
+    catbusPinned = function() {
+      var pinned, status;
+      status = localStorage.getItem(LS_CATBUS_STATUS);
+      pinned = false;
+      if (status === LS_STORED_PINNED) {
+        pinned = true;
+      }
+      return pinned;
+    };
+
+    /**
+     * Set the local storage parameter to open or closed.
+     *
+     * I'm doing this with local storage because if we use the disable animation
+     * trick from the demo, I Think we can cut out the need for anything to be
+     * done server side. That being said, I'm still using string values in case
+     * this needs to be switched back to cookies :)
+     *
+     * @param {boolean} open which way to set the value.
+     */
+    setLocalStorage = function(open) {
+      var store;
+      store = open ? LS_STORED_PINNED : LS_STORED_CLOSED;
+      return localStorage.setItem(LS_CATBUS_STATUS, store);
+    };
+
+    /**
+     * Toggle the catbus open or closed
+     *
+     * @param  {boolean} force specify which way the catbus is supposed to move.
+     */
+    toggleCatbus = function(force) {
+      var newStatus, statusString;
+      newStatus = false;
+      if (typeof force !== "boolean") {
+        force = null;
+        newStatus = !catbusOpen;
+      }
+      if (force === false || force) {
+        newStatus = force;
+      }
+      $body.toggleClass('catbus-open', newStatus);
+      setLocalStorage(newStatus);
+      catbusOpen = newStatus;
+      statusString = "closed";
+      if (newStatus) {
+        statusString = "open";
+      }
+      return $catbus.trigger(statusString + ".atg.catbus");
+    };
+    openCatbus = function() {
+      return toggleCatbus(true);
+    };
+    closeCatbus = function() {
+      return toggleCatbus(false);
+    };
+
+    /**
+     * You can't use CSS transitions through display states :(
+     * @return {jQuery Object} $catbusTail
+     */
+    toggleTail = function() {
+      return $catbusTail.toggleClass('hide', !catbusOpen);
+    };
+
+    /**
+     * Catbus init!
+     */
+    init = function() {
+      var transitionEnd;
+      transitionEnd = 'webkitTransitionEnd otransitionend msTransitionEnd transitionend';
+      $clickables.on('click', toggleCatbus);
+      $catbusTail.on(transitionEnd, toggleTail);
+      if (catbusPinned()) {
+        openCatbus();
+      } else {
+        closeCatbus();
+      }
+    };
+    init();
+    return {
+      openCatbus: openCatbus,
+      closeCatbus: closeCatbus,
+      catbusStatus: function() {
+        return catbusOpen;
+      }
+    };
+  });
+});
