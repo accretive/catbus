@@ -4937,7 +4937,8 @@ button.close {
   width: 264px;
   border-style: solid;
   border-color: #4d4d4d;
-  border-width: 0; }
+  border-width: 0;
+  top: 20px; }
   .catbus-open .catbus__nav {
     border-right-width: 1px; }
   @media only screen and (max-width: 991px) {
@@ -4992,7 +4993,8 @@ button.close {
         box-sizing: border-box;
         width: 100%;
         height: 108px;
-        border-right: 0; } }
+        border-right: 0;
+        top: 0; } }
 
 .catbus__section {
   position: relative;
@@ -5011,15 +5013,16 @@ button.close {
   @media only screen and (min-width: 992px) {
     .catbus__section {
       padding-left: 4%;
-      padding-right: 4%; }
-      .catbus-left .catbus__section, .catbus-right .catbus__section {
-        -webkit-box-flex: auto;
-        -moz-box-flex: auto;
-        box-flex: auto;
-        -webkit-flex: auto;
-        -moz-flex: auto;
-        -ms-flex: auto;
-        flex: auto; } }
+      padding-right: 4%; } }
+  @media only screen and (min-width: 992px) {
+    .catbus-left .catbus__section, .catbus-right .catbus__section {
+      -webkit-box-flex: auto;
+      -moz-box-flex: auto;
+      box-flex: auto;
+      -webkit-flex: auto;
+      -moz-flex: auto;
+      -ms-flex: auto;
+      flex: auto; } }
 
 .catbus__button {
   min-width: 171px;
