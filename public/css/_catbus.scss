@@ -19,6 +19,7 @@ $catbus-caret-class: caret !default;
 $catbus-caret-size: .3em !default;
 $catbus-transition-duration: .25s !default;
 $catbus-use-css-link-arrows: true !default;
+$catbus-include-section-padding: true !default;
 
 // This is about 81% of the width of the iPhone 4 screen.
 // Easily divisible by 3 and 2.
@@ -123,7 +124,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
   border-style: solid;
   border-color: $catbus-divider-color;
   border-width: 0;
-
+  top: $catbus-top-padding;
 
   .catbus-open & {
     border-right-width: 1px;
@@ -164,6 +165,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
       width: 100%;
       height: $catbus-nav-height;
       border-right: 0;
+      top: 0;
     }
   }
 }
@@ -175,15 +177,19 @@ $catbus-divider-color: lighten($catbus-background, 10);
   @include transition-duration($catbus-transition-duration);
   @include transition-property(padding-left, padding-right, top);
 
-  @media #{$media-sm} {
-    padding-left: $catbus-gutter / 2;
-    padding-right: $catbus-gutter / 2;
+  @if $catbus-include-section-padding {
+    @media #{$media-sm} {
+      padding-left: $catbus-gutter / 2;
+      padding-right: $catbus-gutter / 2;
+    }
+
+    @media #{$media-md} {
+      padding-left: $catbus-gutter;
+      padding-right: $catbus-gutter;
+    }
   }
 
   @media #{$media-md} {
-    padding-left: $catbus-gutter;
-    padding-right: $catbus-gutter;
-
     .catbus-left &,
     .catbus-right & {
       @include flex(auto);
