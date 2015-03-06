@@ -1,10 +1,10 @@
 {
   "name": "catbus",
-  "version": "1.0.0",
-  "description": "catbus ======",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "An off canvas side menu manager.",
+  "main": "public/javascript/catbus.coffee",
   "dependencies": {
-    "terraform": "git://github.com/sorahn/terraform#uncompress"
+    "harp": "^0.15.2"
   },
   "devDependencies": {},
   "scripts": {
@@ -15,10 +15,10 @@
     "type": "git",
     "url": "https://github.com/accretive/catbus.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Daryl Roberts <daryl.roberts@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/accretive/catbus/issues"
   },
-  "homepage": "https://github.com/accretive/catbus"
+  "homepage": "https://accretive.github.io/catbus"
 }
