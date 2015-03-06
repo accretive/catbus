@@ -95,13 +95,13 @@ $catbus-divider-color: lighten($catbus-background, 10);
   @media #{$media-md} {
     @include transition-property(width, margin);
 
-    .catbus-left & {
+    .catbus--left & {
       @include display(flex);
       width: unquote("calc(100% + #{$catbus-nav-width})");
       margin-left: -$catbus-nav-width;
     }
 
-    .catbus-right & {
+    .catbus--right & {
       @include display(flex);
       width: unquote("calc(100% + #{$catbus-nav-width})");
     }
@@ -146,17 +146,17 @@ $catbus-divider-color: lighten($catbus-background, 10);
   @media #{$media-md} {
     position: relative;
 
-    .catbus-left & {
+    .catbus--left & {
       @include flex(none);
     }
 
-    .catbus-right & {
+    .catbus--right & {
       @include flex(none);
       @include order(1);
       border-right: 0;
     }
 
-    .catbus-right.catbus-open & {
+    .catbus--right.catbus-open & {
       border-left-width: 1px;
     }
 
@@ -190,8 +190,8 @@ $catbus-divider-color: lighten($catbus-background, 10);
   }
 
   @media #{$media-md} {
-    .catbus-left &,
-    .catbus-right & {
+    .catbus--left &,
+    .catbus--right & {
       @include flex(auto);
     }
   }
@@ -244,7 +244,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
     }
 
     @media #{$media-md} {
-      .catbus-right & {
+      .catbus--right & {
         top: auto;
         bottom: 100%;
         right: 100%;
@@ -263,7 +263,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
     }
   }
 
-  .catbus-left & {
+  .catbus--left & {
 
     @media #{$media-md} {
       @include border-top-radius(0);
@@ -276,7 +276,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
     }
   }
 
-  .catbus-right & {
+  .catbus--right & {
 
     @media #{$media-md} {
       @include border-bottom-radius(0);
