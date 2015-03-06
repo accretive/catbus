@@ -17,10 +17,10 @@ requirejs(['jquery', 'bootstrap', 'catbus'], function($) {
     $catbus = $('[js-catbus]');
     $buttons = $('[js-demo-buttons]');
     config = 'top';
-    if ($body.hasClass('catbus-left')) {
+    if ($body.hasClass('catbus--left')) {
       config = 'left';
     }
-    if ($body.hasClass('catbus-right')) {
+    if ($body.hasClass('catbus--right')) {
       config = 'right';
     }
     changePlaces = function(e) {
@@ -34,7 +34,7 @@ requirejs(['jquery', 'bootstrap', 'catbus'], function($) {
         newPlace = $input.val();
       }
       config = newPlace;
-      return $body.removeClass("catbus-" + oldPlace).addClass("catbus-" + newPlace);
+      return $body.removeClass("catbus--" + oldPlace).addClass("catbus--" + newPlace);
     };
     changeHeader = function(e) {
       var incoming, opposite, outgoing, type;

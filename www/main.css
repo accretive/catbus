@@ -4904,7 +4904,7 @@ button.close {
       -webkit-transition-property: width, margin;
       -moz-transition-property: width, margin;
       transition-property: width, margin; }
-      .catbus-left .catbus__container {
+      .catbus--left .catbus__container {
         display: -webkit-box;
         display: -moz-box;
         display: box;
@@ -4914,7 +4914,7 @@ button.close {
         display: flex;
         width: calc(100% + 264px);
         margin-left: -264px; }
-      .catbus-right .catbus__container {
+      .catbus--right .catbus__container {
         display: -webkit-box;
         display: -moz-box;
         display: box;
@@ -4961,7 +4961,7 @@ button.close {
   @media only screen and (min-width: 992px) {
     .catbus__nav {
       position: relative; }
-      .catbus-left .catbus__nav {
+      .catbus--left .catbus__nav {
         -webkit-box-flex: none;
         -moz-box-flex: none;
         box-flex: none;
@@ -4969,7 +4969,7 @@ button.close {
         -moz-flex: none;
         -ms-flex: none;
         flex: none; }
-      .catbus-right .catbus__nav {
+      .catbus--right .catbus__nav {
         -webkit-box-flex: none;
         -moz-box-flex: none;
         box-flex: none;
@@ -4985,7 +4985,7 @@ button.close {
         order: 1;
         -ms-flex-order: 1;
         border-right: 0; }
-      .catbus-right.catbus-open .catbus__nav {
+      .catbus--right.catbus-open .catbus__nav {
         border-left-width: 1px; }
       .catbus-top .catbus__nav {
         -webkit-box-sizing: border-box;
@@ -5015,7 +5015,7 @@ button.close {
       padding-left: 4%;
       padding-right: 4%; } }
   @media only screen and (min-width: 992px) {
-    .catbus-left .catbus__section, .catbus-right .catbus__section {
+    .catbus--left .catbus__section, .catbus--right .catbus__section {
       -webkit-box-flex: auto;
       -moz-box-flex: auto;
       box-flex: auto;
@@ -5087,7 +5087,7 @@ button.close {
       .catbus__nav .catbus__button {
         display: none; } }
     @media only screen and (min-width: 992px) {
-      .catbus-right .catbus__nav .catbus__button {
+      .catbus--right .catbus__nav .catbus__button {
         top: auto;
         bottom: 100%;
         right: 100%;
@@ -5096,22 +5096,22 @@ button.close {
         -ms-transform-origin: right bottom;
         -o-transform-origin: right bottom;
         transform-origin: right bottom; }
-        .catbus-right .catbus__nav .catbus__button::after {
+        .catbus--right .catbus__nav .catbus__button::after {
           border-top: 0;
           border-bottom: .3em solid; }
       .catbus-top .catbus__nav .catbus__button {
         display: none; } }
   @media only screen and (min-width: 992px) {
-    .catbus-left .catbus__button {
+    .catbus--left .catbus__button {
       border-top-left-radius: 0;
       border-top-right-radius: 0; }
-      .catbus-left .catbus__button.navbar-btn {
+      .catbus--left .catbus__button.navbar-btn {
         display: none; } }
   @media only screen and (min-width: 992px) {
-    .catbus-right .catbus__button {
+    .catbus--right .catbus__button {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0; }
-      .catbus-right .catbus__button.navbar-btn {
+      .catbus--right .catbus__button.navbar-btn {
         display: none; } }
 
 .catbus__tail {
@@ -5326,7 +5326,7 @@ button.close {
     .catbus-top .navbar-open:not(.hide) + .catbus .catbus__nav {
       padding: 0 5%; } }
   @media only screen and (min-width: 992px) {
-    .catbus-left .navbar-open:not(.hide) + .catbus .catbus__section, .catbus-right .navbar-open:not(.hide) + .catbus .catbus__section {
+    .catbus--left .navbar-open:not(.hide) + .catbus .catbus__section, .catbus--right .navbar-open:not(.hide) + .catbus .catbus__section {
       padding-top: 0; } }
 
 .invisible {
