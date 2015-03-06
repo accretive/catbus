@@ -3,8 +3,8 @@ requirejs.config
     'bootstrap': {'deps': ['jquery']}
 
   paths:
-    'jquery': '../../bower_components/jquery/dist/jquery'
-    'bootstrap': '../../bower_components/bootstrap-sass/assets/javascripts/bootstrap'
+    'jquery': '../components/jquery/dist/jquery'
+    'bootstrap': '../components/bootstrap-sass/assets/javascripts/bootstrap'
 
 requirejs ['jquery', 'bootstrap', 'catbus'], ($) -> $ ->
 
@@ -48,16 +48,24 @@ requirejs ['jquery', 'bootstrap', 'catbus'], ($) -> $ ->
   #
   # This disables all the catbus animations while you're hovering over the
   # buttons that pick which side the catbus is on.
-  disableAnim = (bool) ->
-    $catbus.toggleClass 'disable-anim', bool
+  toggleAnim = (bool) ->
+
+    # Disabling makes more sense from a CSS standpoint, so this is a little
+    # weird looking at first.
+    $catbus.toggleClass 'disable-anim', !bool
+
 
   init = ->
     changePlaces config
+
     $buttons
       .on 'change', changePlaces
-      .on 'mouseenter', -> disableAnim(true)
-      .on 'mouseleave', -> disableAnim(false)
+      .on 'mouseenter', -> toggleAnim(false)
+      .on 'mouseleave', -> toggleAnim(true)
 
     $('#js-navbar-config').on 'change', changeHeader
+
+    # Delay enabling the animations until after we've opened the catbus.
+    setTimeout (-> toggleAnim true), 300
 
   do init

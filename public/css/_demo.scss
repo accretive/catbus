@@ -44,5 +44,5 @@
 }
 
 .disable-anim * {
-  @include transition-duration(0 !important);
+  @include transition-duration(0);
 }

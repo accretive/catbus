@@ -1,0 +1,24 @@
+{
+  "name": "catbus",
+  "version": "1.0.0",
+  "description": "catbus ======",
+  "main": "index.js",
+  "dependencies": {
+    "terraform": "git://github.com/sorahn/terraform#uncompress"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/harp server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/accretive/catbus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/accretive/catbus/issues"
+  },
+  "homepage": "https://github.com/accretive/catbus"
+}

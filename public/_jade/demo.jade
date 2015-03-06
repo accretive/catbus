@@ -6,8 +6,6 @@ article
     .row
       .col-sm-6
         form#js-catbus-config.form-inline
-          | Catbus Config: &nbsp;
-
           .btn-group(data-toggle="buttons" js-demo-buttons)
             label.btn.btn-default.btn-sm(for="left")
               input(type="radio" name="catbus-config" value="left")
@@ -21,24 +19,28 @@ article
               input(type="radio" name="catbus-config" value="right")
               | Right
 
-          hr
+          strong &nbsp; Catbus Config
+
+
         //- form
+        hr
 
       .col-sm-6
-        form#js-navbar-config.form-inline
-          | Navbar Config: &nbsp;
+        .clearfix
+          form#js-navbar-config.form-inline.pull-right
+            strong Navbar Config &nbsp;
 
-          .btn-group(data-toggle="buttons")
-            label.btn.btn-default.btn-sm(for="open")
-              input(type="radio" name="navbar-config" value="open")
-              | Open
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-sm(for="open")
+                input(type="radio" name="navbar-config" value="open")
+                | Open
 
-            label.btn.btn-default.btn-sm.active(for="standard")
-              input(type="radio" name="navbar-config" value="standard" checked)
-              | Standard
+              label.btn.btn-default.btn-sm.active(for="standard")
+                input(type="radio" name="navbar-config" value="standard" checked)
+                | Standard
 
-          hr
-        //- form
+          //- form
+        hr.clearfix
 
     p Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn. Shagg cehye tharanak bug ooboshu, n'ghft ep ooboshu shogg vulgtlagln ep hlirgh uaaah tharanak lloig lw'nafh, vulgtlagln shugg y-vulgtlagln 'fhalma cuh'e R'lyeh Yoggoth epog Yoggoth. Mnahn' ph'ee uaaah Tsathoggua 'fhalma kn'a sll'ha orr'e Dagon vulgtlagln shagg Chaugnar Faugn ilyaa ulnoth nglui hrii ch' f'goka ph'li'hee, ooboshu Yoggoth shuggor uln uh'e f'throd Azathoth fhtagn stell'bsnaor kn'a Azathoth nnnhafh'drn 'bthnk li'hee llll k'yarnak. F'mnahn' ebunmanyth Azathoth nilgh'riyar shogg nglui cftaghu Cthulhu r'luh, phlegeth uln Tsathoggua shogg sll'ha ph'Yoggoth h'ebunma k'yarnakor syha'h, nilgh'rinyth Yoggoth uln uaaah nnnr'luh ep hupadgh.
 
