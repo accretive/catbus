@@ -28,8 +28,8 @@
 
     .catbus__section {
       @media #{$media-md} {
-        .catbus-left &,
-        .catbus-right & {
+        .catbus--left &,
+        .catbus--right & {
           padding-top: 0;
         }
       }

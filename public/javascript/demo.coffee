@@ -13,8 +13,8 @@ requirejs ['jquery', 'bootstrap', 'catbus'], ($) -> $ ->
   $buttons = $('[js-demo-buttons]')
 
   config = 'top'
-  config = 'left' if $body.hasClass 'catbus-left'
-  config = 'right' if $body.hasClass 'catbus-right'
+  config = 'left' if $body.hasClass 'catbus--left'
+  config = 'right' if $body.hasClass 'catbus--right'
 
   changePlaces = (e) ->
     oldPlace = config
@@ -31,8 +31,8 @@ requirejs ['jquery', 'bootstrap', 'catbus'], ($) -> $ ->
     config = newPlace
 
     $body
-      .removeClass "catbus-#{oldPlace}"
-      .addClass "catbus-#{newPlace}"
+      .removeClass "catbus--#{oldPlace}"
+      .addClass "catbus--#{newPlace}"
 
   changeHeader = (e) ->
     type = $(e.target).val()
