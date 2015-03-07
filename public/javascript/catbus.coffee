@@ -4,27 +4,24 @@
 #
 
 # This silly line is the require line and the jQuery function start
-define ['jquery'], ($) -> $(document).ready ->
+define 'doc', ->
+  return document
 
-  # Cached jquery references
-  $body = $('body')
+define ['jquery', 'doc'], ($, doc) ->
 
-  # @todo
-  # $dismissables = $('[js-catbus-dismiss]')
-  # closeForDismissableClick = ->
-  #   if $catbusTail.is(':visible') and catbusOpen
-  #     closeCatbus()
-
-  $catbus     = $('[js-catbus]')
-  $catbusTail = $('[js-catbus-tail]')
-  $clickables = $catbusTail.add('[js-catbus-button]')
+  # jQuery Object References
+  $body            =
+  $catbus          =
+  $catbusTail      =
+  $clickables      = {}
 
   # Local storage constants
   LS_CATBUS_STATUS = 'catbus-status'
   LS_STORED_PINNED = 'pinned'
   LS_STORED_CLOSED = 'closed'
 
-  catbusOpen = $body.hasClass 'catbus-open'
+  # Other stuff.
+  catbusOpen       = false
 
   ###*
    * Tells us if local storage says the catbus is pinned open or not.
@@ -60,12 +57,10 @@ define ['jquery'], ($) -> $(document).ready ->
 
     newStatus = false
 
-    if typeof(force) isnt "boolean"
-      force = null
-      newStatus = !catbusOpen
-
-    if force is false or force
+    if force is false or force is true
       newStatus = force
+    else
+      newStatus = !catbusOpen
 
     $body.toggleClass 'catbus-open', newStatus
     setLocalStorage newStatus
@@ -82,7 +77,6 @@ define ['jquery'], ($) -> $(document).ready ->
 
   ###*
    * You can't use CSS transitions through display states :(
-   * @return {jQuery Object} $catbusTail
   ###
   toggleTail = ->
     $catbusTail.toggleClass 'hide', !catbusOpen
@@ -91,17 +85,26 @@ define ['jquery'], ($) -> $(document).ready ->
    * Catbus init!
   ###
   init = ->
-    transitionEnd = 'webkitTransitionEnd otransitionend msTransitionEnd transitionend'
+    $(doc).ready ->
+      transitionEnd = 'webkitTransitionEnd otransitionend msTransitionEnd transitionend'
 
-    $clickables.on 'click', toggleCatbus
-    $catbusTail.on transitionEnd, toggleTail
+      $body       = $('body')
+      $catbus     = $('[js-catbus]')
+      $catbusTail = $('[js-catbus-tail]')
+      $clickables = $catbusTail.add('[js-catbus-button]')
 
-    if catbusPinned() then openCatbus() else closeCatbus()
-    return
+      catbusOpen = $body.hasClass 'catbus-open'
 
-  do init
+      $clickables.on 'click', toggleCatbus
+      $catbusTail.on transitionEnd, toggleTail
+
+      if catbusPinned() then openCatbus() else closeCatbus()
+
+  # Unless we have reason not to, initialize the catbus as soon as we
+  # get required.
+  init() unless doc.haltCatbus
 
   return {
-    openCatbus, closeCatbus
+    init, openCatbus, closeCatbus
     catbusStatus: -> catbusOpen
   }
