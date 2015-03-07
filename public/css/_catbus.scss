@@ -45,40 +45,45 @@ $catbus-links-height-top: 22px !default;
 // Colors
 //
 $catbus-theme: dark !default;
+$catbus-theme-default: true;
 
-$catbus-background: #333333;
-$catbus-background-dark: darken($catbus-background, 10);
+@if($catbus-theme == light) {
+  $catbus-theme-default: false;
+}
+
+@function darkenIf($condition, $color, $amount) {
+  @if $condition {
+    @return lighten($color, $amount);
+  }
+
+  @return darken($color, $amount);
+}
+
+@function lightenIf($condition, $color, $amount, $condition) {
+  @if $condition {
+    @return darken($color, $amount);
+  }
+
+  @return lighten($color, $amount);
+}
+
+
+
+$catbus-background: if($catbus-theme-default, #333333, #cccccc);
+$catbus-background-dark: darkenIf( $catbus-theme-default, $catbus-background, 10);
 
 $catbus-tab-background: $catbus-background-dark;
-$catbus-tab-background-hover: lighten($catbus-tab-background, 4);
+$catbus-tab-background-hover: lightenIf($catbus-theme-default, $catbus-tab-background, 4);
 $catbus-tab-background-active: $catbus-background;
 
-$catbus-link-color: #999999;
-$catbus-link-color-dim: darken($catbus-link-color, 7);
-$catbus-link-color-active: #ffffff;
+$catbus-link-color: if($catbus-theme-default, #999999, #666666);
+$catbus-link-color-dim: darkenIf($catbus-theme-default, $catbus-link-color, 7);
+$catbus-link-color-active: if($catbus-theme-default, #ffffff, #000000);
 $catbus-link-arrow-size: .5em;
 
 $catbus-tab-color: $catbus-link-color-active;
 
-$catbus-divider-color: lighten($catbus-background, 10);
-
-// $catbus-background-hover  : #262626;
-// $catbus-background-active : ;
-// $catbus-color             : #999999;
-// $catbus-color-dim         : #888888;
-// $catbus-color-active      : #ffffff;
-// $catbus-divider-color     : #4d4d4d;
-
-// @if $catbus-theme == light {
-//   $catbus-background        : invert($catbus-background);
-//   $catbus-background-hover  : invert($catbus-background-hover);
-//   $catbus-background-active : invert($catbus-background-active);
-//   $catbus-color             : invert($catbus-color);
-//   $catbus-color-dim         : invert($catbus-color-dim);
-//   $catbus-color-active      : invert($catbus-color-active);
-//   $catbus-divider-color     : invert($catbus-divider-color);
-// }
-
+$catbus-divider-color: lightenIf($catbus-theme-default, $catbus-background, 10);
 
 .catbus {
   position: relative;
