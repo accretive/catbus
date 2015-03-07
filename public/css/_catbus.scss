@@ -30,7 +30,7 @@ $catbus-nav-height: 108px !default;
 $catbus-nav-offset: 0 !default;
 
 // This is what you would normally use as a bottom margin on the navbar.
-$catbus-top-padding: 20px !default;
+$catbus--top-padding: 20px !default;
 $catbus-h-padding: 15px !default;
 
 $catbus-gutter: 4% !default;
@@ -106,7 +106,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
       width: unquote("calc(100% + #{$catbus-nav-width})");
     }
 
-    .catbus-top & {
+    .catbus--top & {
       margin-top: -$catbus-nav-height;
     }
 
@@ -124,7 +124,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
   border-style: solid;
   border-color: $catbus-divider-color;
   border-width: 0;
-  top: $catbus-top-padding;
+  top: $catbus--top-padding;
 
   .catbus-open & {
     border-right-width: 1px;
@@ -160,7 +160,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
       border-left-width: 1px;
     }
 
-    .catbus-top & {
+    .catbus--top & {
       @include box-sizing(border-box);
       width: 100%;
       height: $catbus-nav-height;
@@ -173,7 +173,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
 .catbus__section {
   position: relative;
   z-index: 10; // The Bottom
-  padding-top: $catbus-top-padding;
+  padding-top: $catbus--top-padding;
   @include transition-duration($catbus-transition-duration);
   @include transition-property(padding-left, padding-right, top);
 
@@ -257,7 +257,7 @@ $catbus-divider-color: lighten($catbus-background, 10);
       }
 
       // Hide the button in the catbus__nav when we're using the navbar button.
-      .catbus-top & {
+      .catbus--top & {
         display: none;
       }
     }
