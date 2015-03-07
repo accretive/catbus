@@ -53,18 +53,18 @@ $catbus-theme-default: true;
 
 @function darkenIf($condition, $color, $amount) {
   @if $condition {
-    @return lighten($color, $amount);
-  }
-
-  @return darken($color, $amount);
-}
-
-@function lightenIf($condition, $color, $amount, $condition) {
-  @if $condition {
     @return darken($color, $amount);
   }
 
   @return lighten($color, $amount);
+}
+
+@function lightenIf($condition, $color, $amount, $condition) {
+  @if $condition {
+    @return lighten($color, $amount);
+  }
+
+  @return darken($color, $amount);
 }
 
 
