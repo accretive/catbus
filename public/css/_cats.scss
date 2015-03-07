@@ -11,7 +11,7 @@
   background: $catbus-background;
 
   @media #{$media-md} {
-    .catbus-top & {
+    .catbus--top & {
       @include display(flex);
 
       $shadow: 0px 20px 20px -15px rgba(0, 0, 0, 0.75);
@@ -33,7 +33,7 @@
   }
 
   @media #{$media-md} {
-    .catbus-top & {
+    .catbus--top & {
       @include flex(none);
       @include flex-direction(column);
       width: $catbus-tab-width;
@@ -73,7 +73,7 @@
   }
 
   @media #{$media-md} {
-    .catbus-top & {
+    .catbus--top & {
       text-align: left;
       border-bottom: 0;
     }
@@ -84,15 +84,15 @@
     //
     // Calculate the line-heights accordingly
     // The first one of these is getting only 2 tabs.
-    .catbus-top li:nth-child(1):nth-last-child(2) &,
-    .catbus-top li:nth-child(2):nth-last-child(1) & {
+    .catbus--top li:nth-child(1):nth-last-child(2) &,
+    .catbus--top li:nth-child(2):nth-last-child(1) & {
       line-height: $catbus-nav-height / 2;
     }
 
     // This one is when there are 3.
-    .catbus-top li:nth-child(1):nth-last-child(3) &,
-    .catbus-top li:nth-child(2):nth-last-child(2) &,
-    .catbus-top li:nth-child(3):nth-last-child(1) & {
+    .catbus--top li:nth-child(1):nth-last-child(3) &,
+    .catbus--top li:nth-child(2):nth-last-child(2) &,
+    .catbus--top li:nth-child(3):nth-last-child(1) & {
       line-height: $catbus-nav-height / 3;
     }
   }
@@ -101,7 +101,7 @@
 .cats__content {
 
   @media #{$media-md} {
-    .catbus-top & {
+    .catbus--top & {
       @include flex(auto);
     }
   }
@@ -125,7 +125,7 @@
   height: 100%;
 
   @media #{$media-md} {
-    .catbus-top & {
+    .catbus--top & {
       @include display(flex);
       @include flex-flow(column wrap);
       height: $catbus-nav-height;
@@ -175,7 +175,7 @@
   }
 
   @media #{$media-md} {
-    .catbus-top & {
+    .catbus--top & {
       line-height: $catbus-links-height-top;
       border: 0;
       padding: 0;
