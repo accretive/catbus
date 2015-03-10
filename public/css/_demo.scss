@@ -19,7 +19,7 @@
   &:not(.hide) + .catbus {
     .catbus__nav {
 
-      @media #{$media-md} {
+      @media #{$media-lg} {
         .catbus--top & {
           padding: 0 5%;
         }
@@ -27,7 +27,7 @@
     }
 
     .catbus__section {
-      @media #{$media-md} {
+      @media #{$media-lg} {
         .catbus--left &,
         .catbus--right & {
           padding-top: 0;
