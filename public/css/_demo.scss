@@ -35,8 +35,23 @@
       }
     }
   }
+}
 
 
+.catbus__button {
+
+  @media #{$media-lg} {
+
+    .catbus--left &,
+    .catbus--right & {
+      // This hides the button in the bootstrap navbar.  Whatever custom
+      // buttons are used need to be hidden some other way.
+      &.navbar-btn {
+        display: none;
+      }
+    }
+
+  }
 }
 
 .invisible {

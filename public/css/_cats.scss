@@ -139,6 +139,7 @@
 
 
 .cats__link {
+  @include clearfix;
   position: relative;
   display: block;
   font-size: 14px;
@@ -183,6 +184,22 @@
       &::after {
         display: none;
       }
+    }
+  }
+}
+
+.cats__count {
+  float: right;
+  margin-right: 1.5em;
+  font-size: .8em;
+
+  @include self-link-states {
+    color: $catbus-link-color-dim;
+  }
+
+  @media #{$media-md} {
+    .catbus--top & {
+      display: none;
     }
   }
 }

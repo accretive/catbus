@@ -224,10 +224,18 @@ $catbus-divider-color: lightenIf($catbus-theme-default, $catbus-background, 10);
       @include transform(translateY(-50%) rotateZ(-180deg));
     }
 
-    @media #{$media-md} {
+    @media #{$media-lg} {
       @include caret-triangle-base(bottom, $catbus-caret-size);
     }
   }
+
+  @media #{$media-lg} {
+    .catbus--left &,
+    .catbus--right & {
+      display: none;
+    }
+  }
+
 
   &:active, &:focus {
     outline: 0;
@@ -247,11 +255,18 @@ $catbus-divider-color: lightenIf($catbus-theme-default, $catbus-background, 10);
     }
 
     @media #{$media-lg} {
+      .catbus--left & {
+        display: block;
+        @include border-top-radius(0);
+      }
+
       .catbus--right & {
+        display: block;
         top: auto;
         bottom: 100%;
         right: 100%;
         @include transform-origin(right bottom);
+        @include border-bottom-radius(0);
 
         &::after {
           border-top: 0;
@@ -261,32 +276,6 @@ $catbus-divider-color: lightenIf($catbus-theme-default, $catbus-background, 10);
 
       // Hide the button in the catbus__nav when we're using the navbar button.
       .catbus--top & {
-        display: none;
-      }
-    }
-  }
-
-  .catbus--left & {
-
-    @media #{$media-lg} {
-      @include border-top-radius(0);
-
-      // This hides the button in the bootstrap navbar.  Whatever custom
-      // buttons are used need to be hidden some other way.
-      &.navbar-btn {
-        display: none;
-      }
-    }
-  }
-
-  .catbus--right & {
-
-    @media #{$media-lg} {
-      @include border-bottom-radius(0);
-
-      // This hides the button in the bootstrap navbar.  Whatever custom
-      // buttons are used need to be hidden some other way.
-      &.navbar-btn {
         display: none;
       }
     }
