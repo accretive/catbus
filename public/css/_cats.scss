@@ -110,6 +110,13 @@
 .cats__pane {
   display: none;
 
+  @media #{$media-md} {
+    .catbus--top & {
+      padding: 10px 20px;
+      height: $catbus-nav-height;
+    }
+  }
+
   &.active {
     display: block;
   }
@@ -128,9 +135,6 @@
       @include display(flex);
       @include flex-direction(column);
       @include flex-wrap(wrap);
-
-      height: $catbus-nav-height;
-      padding: 10px 20px;
 
       & > li {
         width: unquote("calc(100% / 9)");
