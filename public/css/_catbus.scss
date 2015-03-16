@@ -224,7 +224,7 @@ $catbus-divider-color: lightenIf($catbus-theme-default, $catbus-background, 10);
       @include transform(translateY(-50%) rotateZ(-180deg));
     }
 
-    @media #{$media-lg} {
+    @media #{$media-md} {
       @include caret-triangle-base(bottom, $catbus-caret-size);
     }
   }
