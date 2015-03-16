@@ -142,12 +142,15 @@
 
 .cats__link {
   @include clearfix;
+  @include ellipsis;
   position: relative;
   display: block;
   font-size: 14px;
   color: $catbus-link-color;
 
+  height: $catbus-links-height;
   line-height: $catbus-links-height;
+
   border-bottom: 1px solid $catbus-divider-color;
   padding: 0 $catbus-h-padding;
 
@@ -179,6 +182,7 @@
   @media #{$media-md} {
     .catbus--top & {
       line-height: $catbus-links-height-top;
+      height: $catbus-links-height-top;
       border: 0;
       padding: 0;
 
