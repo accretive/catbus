@@ -126,7 +126,9 @@
   @media #{$media-md} {
     .catbus--top & {
       @include display(flex);
-      @include flex-flow(column wrap);
+      @include flex-direction(column);
+      @include flex-wrap(wrap);
+
       height: $catbus-nav-height;
       padding: 10px 20px;
 
