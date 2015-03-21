@@ -18,5 +18,9 @@
           ul.cats__links
             each cat, i in group.links
               - var selected = i == 0 ? "selected" : ""
-              li: a.cats__link(href="#" class="#{selected}") #{cat}
+              - var count = (function () { return Math.floor(Math.random() * (500 - 100) + 100); })()
+
+              li: a.cats__link(href="#" class="#{selected}")
+                .cats__count #{count}
+                | #{cat}
 

@@ -33,7 +33,7 @@ $catbus-nav-offset: 0 !default;
 $catbus--top-padding: 20px !default;
 $catbus-h-padding: 15px !default;
 
-$catbus-gutter: 4% !default;
+$catbus-gutter: 4vw !default;
 
 // This is also the minimum width of the .catbus__button so that they match.
 $catbus-tab-width: 171px !default;
@@ -66,7 +66,6 @@ $catbus-theme-default: true;
 
   @return darken($color, $amount);
 }
-
 
 
 $catbus-background: if($catbus-theme-default, #333333, #cccccc);
@@ -230,6 +229,14 @@ $catbus-divider-color: lightenIf($catbus-theme-default, $catbus-background, 10);
     }
   }
 
+  @media #{$media-lg} {
+    .catbus--left &,
+    .catbus--right & {
+      display: none;
+    }
+  }
+
+
   &:active, &:focus {
     outline: 0;
   }
@@ -242,18 +249,24 @@ $catbus-divider-color: lightenIf($catbus-theme-default, $catbus-background, 10);
     @include transform-origin(right top);
     @include transform(rotateZ(-90deg));
 
-
     // Hide the button on smaller screens
-    @media #{$media-sm-max} {
+    @media #{$media-md-max} {
       display: none;
     }
 
-    @media #{$media-md} {
+    @media #{$media-lg} {
+      .catbus--left & {
+        display: block;
+        @include border-top-radius(0);
+      }
+
       .catbus--right & {
+        display: block;
         top: auto;
         bottom: 100%;
         right: 100%;
         @include transform-origin(right bottom);
+        @include border-bottom-radius(0);
 
         &::after {
           border-top: 0;
@@ -263,32 +276,6 @@ $catbus-divider-color: lightenIf($catbus-theme-default, $catbus-background, 10);
 
       // Hide the button in the catbus__nav when we're using the navbar button.
       .catbus--top & {
-        display: none;
-      }
-    }
-  }
-
-  .catbus--left & {
-
-    @media #{$media-md} {
-      @include border-top-radius(0);
-
-      // This hides the button in the bootstrap navbar.  Whatever custom
-      // buttons are used need to be hidden some other way.
-      &.navbar-btn {
-        display: none;
-      }
-    }
-  }
-
-  .catbus--right & {
-
-    @media #{$media-md} {
-      @include border-bottom-radius(0);
-
-      // This hides the button in the bootstrap navbar.  Whatever custom
-      // buttons are used need to be hidden some other way.
-      &.navbar-btn {
         display: none;
       }
     }

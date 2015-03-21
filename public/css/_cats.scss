@@ -110,6 +110,13 @@
 .cats__pane {
   display: none;
 
+  @media #{$media-md} {
+    .catbus--top & {
+      padding: 10px 20px;
+      height: $catbus-nav-height;
+    }
+  }
+
   &.active {
     display: block;
   }
@@ -126,9 +133,8 @@
   @media #{$media-md} {
     .catbus--top & {
       @include display(flex);
-      @include flex-flow(column wrap);
-      height: $catbus-nav-height;
-      padding: 10px 20px;
+      @include flex-direction(column);
+      @include flex-wrap(wrap);
 
       & > li {
         width: unquote("calc(100% / 9)");
@@ -139,12 +145,16 @@
 
 
 .cats__link {
+  @include clearfix;
+  @include ellipsis;
   position: relative;
   display: block;
   font-size: 14px;
   color: $catbus-link-color;
 
+  height: $catbus-links-height;
   line-height: $catbus-links-height;
+
   border-bottom: 1px solid $catbus-divider-color;
   padding: 0 $catbus-h-padding;
 
@@ -176,6 +186,7 @@
   @media #{$media-md} {
     .catbus--top & {
       line-height: $catbus-links-height-top;
+      height: $catbus-links-height-top;
       border: 0;
       padding: 0;
 
@@ -183,6 +194,22 @@
       &::after {
         display: none;
       }
+    }
+  }
+}
+
+.cats__count {
+  float: right;
+  margin-right: 1.5em;
+  font-size: .8em;
+
+  @include self-link-states {
+    color: $catbus-link-color-dim;
+  }
+
+  @media #{$media-md} {
+    .catbus--top & {
+      display: none;
     }
   }
 }
