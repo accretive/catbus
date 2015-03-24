@@ -1,0 +1,99 @@
+@mixin self-link-states {
+  &, &:hover, &:focus {
+    @content;
+  }
+}
+
+
+@mixin auto-bw($color, $black: #000000, $white: #FFFFFF) {
+  @if lightness($color) > 60% {
+    @return $black;
+  }
+
+  @return $white;
+}
+
+
+//
+// @author Daryl Roberts
+// @license MIT
+// @url https://gist.github.com/sorahn/7915cae6c820e351158f
+//
+@mixin side-shadow($shadow, $side, $base-size: 50px) {
+  // If you need to make shadows larger than 50px, you can
+  // override the base size.
+
+  // Some basics.
+  // The child is absolute, so the parent must be relative.
+  // We're going to use a pseudo element to create the shadow, so
+  // we need to hide the overflow.
+  position: relative;
+  overflow: hidden;
+
+  // Here is the pseudo element that is going to have a shadow.
+  &::after {
+    display: block;
+    position: absolute;
+    content: "";
+    box-shadow: $shadow;
+
+    // If this was a fancy mixin, I might try and figure out the
+    // $side based on the $shadow, but I'm lazy.
+
+    // Also the top/bottom/width and the right/left/height.  See
+    // previous reasoning.
+    @if $side == left {
+      right: 100%;
+      top: -$base-size;
+      bottom: -$base-size;
+      width: $base-size;
+    } @else if $side == right {
+      right: 100%;
+      top: -$base-size;
+      bottom: -$base-size;
+      width: $base-size;
+    } @else if $side == bottom {
+      top: 100%;
+      left: -$base-size;
+      right: -$base-size;
+      height: $base-size;
+    } @else {
+      bottom: 100%;
+      left: -$base-size;
+      right: -$base-size;
+      height: $base-size;
+    }
+  }
+}
+
+
+@mixin caret-triangle-base($direction, $size) {
+
+  @if $direction == top {
+    border-top: 0;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid currentColor;
+  }
+
+  @else if $direction == right {
+    border-top: $size solid transparent;
+    border-left: $size solid currentColor;
+    border-right: 0;
+    border-bottom: $size solid transparent;
+  }
+
+  @else if $direction == bottom {
+    border-top: $size solid currentColor;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: 0;
+  }
+
+  @else { // $direction == left
+    border-top: $size solid transparent;
+    border-left: 0;
+    border-right: $size solid currentColor;
+    border-bottom: $size solid transparent;
+  }
+}

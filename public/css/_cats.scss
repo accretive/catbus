@@ -1,0 +1,234 @@
+.cats {
+  a {
+    @include self-link-states {
+      text-decoration: none;
+    }
+  }
+}
+
+
+.cats__container {
+  background: $catbus-background;
+
+  @media #{$media-md} {
+    .catbus--top & {
+      @include display(flex);
+
+      $shadow: 0px 20px 20px -15px rgba(0, 0, 0, 0.75);
+      @include side-shadow($shadow, top);
+    }
+  }
+}
+
+
+.cats__tabs {
+  margin: 0;
+  padding: 1em 0 0;
+  width: 100%;
+  background: $catbus-background-dark;
+  @include display(flex);
+
+  & > li {
+    @include flex(1 1 33%);
+  }
+
+  @media #{$media-md} {
+    .catbus--top & {
+      @include flex(none);
+      @include flex-direction(column);
+      width: $catbus-tab-width;
+      padding: 0;
+
+      & > li {
+        @include flex(1 1 33%);
+        width: 100%;
+        line-height: $catbus-nav-height / 3;
+      }
+
+    }
+  }
+}
+
+// This one is a stupid name
+.cats__tab {
+  @include ellipsis;
+  display: block;
+  text-align: center;
+  background: $catbus-tab-background;
+  color: $catbus-tab-color;
+  border-bottom: 1px solid $catbus-divider-color;
+  line-height: $catbus-links-height;
+  padding-left: $catbus-h-padding;
+  padding-right: $catbus-h-padding;
+
+  &:hover {
+    color: $catbus-tab-color;
+    background: $catbus-tab-background-hover;
+  }
+
+  li.active > & {
+    color: $catbus-tab-color;
+    background: $catbus-tab-background-active;
+    border-color: $catbus-tab-background-active;
+  }
+
+  @media #{$media-md} {
+    .catbus--top & {
+      text-align: left;
+      border-bottom: 0;
+    }
+
+    //
+    // Selector abuse!
+    // https://grack.com/blog/2015/01/09/abusing-css3-selectors/
+    //
+    // Calculate the line-heights accordingly
+    // The first one of these is getting only 2 tabs.
+    .catbus--top li:nth-child(1):nth-last-child(2) &,
+    .catbus--top li:nth-child(2):nth-last-child(1) & {
+      line-height: $catbus-nav-height / 2;
+    }
+
+    // This one is when there are 3.
+    .catbus--top li:nth-child(1):nth-last-child(3) &,
+    .catbus--top li:nth-child(2):nth-last-child(2) &,
+    .catbus--top li:nth-child(3):nth-last-child(1) & {
+      line-height: $catbus-nav-height / 3;
+    }
+  }
+}
+
+.cats__content {
+
+  @media #{$media-md} {
+    .catbus--top & {
+      @include flex(auto);
+    }
+  }
+}
+
+.cats__pane {
+  display: none;
+
+  @media #{$media-md} {
+    .catbus--top & {
+      padding: 10px 20px;
+      height: $catbus-nav-height;
+    }
+  }
+
+  &.active {
+    display: block;
+  }
+}
+
+.cats__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  overflow: hidden;
+  height: 100%;
+
+  @media #{$media-md} {
+    .catbus--top & {
+      @include display(flex);
+      @include flex-direction(column);
+      @include flex-wrap(wrap);
+
+      & > li {
+        width: unquote("calc(100% / 9)");
+      }
+    }
+  }
+}
+
+
+.cats__link {
+  @include clearfix;
+  @include ellipsis;
+  position: relative;
+  display: block;
+  font-size: 14px;
+  color: $catbus-link-color;
+
+  height: $catbus-links-height;
+  line-height: $catbus-links-height;
+
+  border-bottom: 1px solid $catbus-divider-color;
+  padding: 0 $catbus-h-padding;
+
+  &:hover,
+  &.selected,
+  &.active {
+    color: $catbus-link-color-active;
+  }
+
+  // If you want to use your own iconography, opt out of this stuff.
+  @if $catbus-use-css-link-arrows {
+
+    // This is the bottom (z-ordering) half of the chevron.
+    &::before {
+      @extend %catbus-chevron;
+      right: 1em;
+      border-color: transparent transparent transparent $catbus-link-color-dim;
+    }
+
+    // This is a mask on top of the above arrow, that is the same color
+    // as the background, so it looks like a chevron instead of an arrow.
+    &::after {
+      @extend %catbus-chevron;
+      right: 1em + ($catbus-link-arrow-size / 2.5);
+      border-color: transparent transparent transparent $catbus-background;
+    }
+  }
+
+  @media #{$media-md} {
+    .catbus--top & {
+      line-height: $catbus-links-height-top;
+      height: $catbus-links-height-top;
+      border: 0;
+      padding: 0;
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+.cats__count {
+  float: right;
+  margin-right: 1.5em;
+  font-size: .8em;
+
+  @include self-link-states {
+    color: $catbus-link-color-dim;
+  }
+
+  @media #{$media-md} {
+    .catbus--top & {
+      display: none;
+    }
+  }
+}
+
+// CSS Triangles!
+// http://apps.eky.hk/css-triangle-generator/
+//
+// @extends show up in the code at the location of the %placeholder.  Its
+// OK for the placeholder to be *after* the code that is calling it.
+//
+// .cats__link::before, .cats__link::after
+%catbus-chevron {
+  position: absolute;
+  top: 50%;
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: $catbus-link-arrow-size;
+  border-right-width: 0;
+  @include transform(translateY(-50%));
+}

@@ -1,0 +1,26 @@
+//- Top container for the cats content.
+.cats
+
+  //- Another container, this one has a shadow and a background
+  //- Also gets a `display: flex` when big enough.
+  .cats__container
+
+    ul.cats__tabs
+      li.active: a.cats__tab(href="#js-one" data-toggle="tab") Tab One
+      li: a.cats__tab(href="#js-two" data-toggle="tab") Tab Two
+      li: a.cats__tab(href="#js-three" data-toggle="tab") Tab Three
+
+    //- Loop through all my fake data in _harp.json and display it
+    .cats__content
+      each group in cats
+        - var active = group.title == "one" ? "active" : ""
+        .cats__pane(id="js-#{group.title}" class="#{active}")
+          ul.cats__links
+            each cat, i in group.links
+              - var selected = i == 0 ? "selected" : ""
+              - var count = (function () { return Math.floor(Math.random() * (500 - 100) + 100); })()
+
+              li: a.cats__link(href="#" class="#{selected}")
+                .cats__count #{count}
+                | #{cat}
+
